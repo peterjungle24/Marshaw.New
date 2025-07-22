@@ -1,14 +1,13 @@
-﻿using UnityEngine;
-using BepInEx;
-using BepInEx.Logging;
-
-namespace SourceCode
+﻿namespace SourceCode
 {
     // good class template to the rain world modding.
     // this attribute needs to have the SAME "id", "name" and "version" from "modinfo.json" to work well
     [BepInPlugin(ID, NAME, VERSION)]
     public class Plugin : BaseUnityPlugin
     {
+        // the Marshaw scug id
+        public static readonly SlugcatStats.Name slgMarshaw = new SlugcatStats.Name("slugg.slugcat.marshaw");
+
         // the fucking logger to use.
         public static ManualLogSource logger;
 
@@ -26,6 +25,9 @@ namespace SourceCode
 
             // Initialize logging. Useful for see if the mod is actually working.
             On.RainWorld.OnModsInit += Initialize;
+
+            // HOOKS - Slugcat.Marshaw
+            Slugcats.MarshawFeatures.Hooks();
         }
 
         private void Initialize(On.RainWorld.orig_OnModsInit orig, RainWorld self)
