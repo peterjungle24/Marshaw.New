@@ -1,4 +1,6 @@
-﻿namespace SourceCode
+﻿using SourceCode.Pom.Features;
+
+namespace SourceCode
 {
     // good class template to the rain world modding.
     // this attribute needs to have the SAME "id", "name" and "version" from "modinfo.json" to work well
@@ -7,6 +9,7 @@
     {
         // the Marshaw scug id
         public static readonly SlugcatStats.Name slgMarshaw = new SlugcatStats.Name("slugg.slugcat.marshaw");
+        public static readonly SlugcatStats.Name slgSlugg = new SlugcatStats.Name("slugg.slugcat.slugg");
 
         // the fucking logger to use.
         public static ManualLogSource logger;
@@ -17,6 +20,9 @@
         private const string NAME = "Marshawwwwwwwwwwwww";
         private const string VERSION = "0.1.2";
 
+        // the remix menu instance
+        private static RemixMenu.REMIX_menuses remix;
+
         // the core of the mod. hooks will do everything work :>
         public void OnEnable()
         {
@@ -25,9 +31,13 @@
 
             // Initialize logging. Useful for see if the mod is actually working.
             On.RainWorld.OnModsInit += Initialize;
+            // Initialize the POM objects
+            InitializePOM();
 
             // HOOKS - Slugcat.Marshaw
             Slugcats.MarshawFeatures.Hooks();
+            // HOOKS - Slugcat.Slugg
+            Slugcats.SluggFeatures.Hooks();
         }
 
         private void Initialize(On.RainWorld.orig_OnModsInit orig, RainWorld self)
@@ -35,8 +45,28 @@
             // Logs to the file
             logger.LogInfo("I am fucking alive!");
 
+            /****************************************************/
+
+            /* CUSTOM SOUND */
+            Misc.DeathSounds.Initialize();
+            Misc.CustomSFX.Initialize();
+
+            /* MENU REMIX */
+            remix = new RemixMenu.REMIX_menuses();
+            MachineConnector.SetRegisteredOI(ID, remix);
+
+            /****************************************************/
+
             // ALWAYS REMEMBER TO CALL THE ORIG AT SOMEWHERE
             orig(self);
+        }
+        private void InitializePOM()
+        {
+            var objects = "Slugg objects";
+            var misc = "Slugg misc";
+
+            // objects
+            RegisterManagedObject<Pom.Features.ClimbableSurface, ClimbableSurface_Data, ClimbableSurface_REPR>("Climbable Wall", objects, false);
         }
     }
 }

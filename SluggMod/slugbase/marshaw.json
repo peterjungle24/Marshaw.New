@@ -1,0 +1,60 @@
+{
+	"id": "slugg.slugcat.marshaw",
+	"name": "Marshaw",
+	"description": "m",
+	"features": {
+		"custom_colors": [
+			{
+				"name": "Body", 
+				"story": "656565", "arena": ["FFFFFF", "F1D943", "FF88A5", "3D3EA2"]
+			},
+			{
+				"name": "Eyes", 
+				"story": "141414", "arena": ["141414", "141414", "141414", "FFFFFF"]
+			}
+		],
+		"diet": {
+			"base": "White",
+			"corpses": 0,
+			"plants": 1,
+			"meat": 2,
+			"overrides": {
+				"DangleFruit": 0.5,
+				"WaterNut": 0.5,
+				"SlimeMold": 0.75,
+				"LizardTemplate": 1.10,
+			}
+		},
+		
+		"the_mark": true,
+		"has_dreams": true,
+		"use_default_dreams": true,
+		"auto_grab_batflies": false,
+		"the_glow": false,
+		"back_spear": false,
+		"can_maul": true,
+		"karma": 4,
+		"food_min": 3,
+		"food_max": 4,
+		"climb_speed": 2,
+		"tunnel_speed": 2,
+		"maul_damage": 1.20,
+		"weight": 0.5,
+		"loudness": 2.0,
+		"walk_speed": 1.75,
+		"color": "656565",
+		"throw_skill": [ 2, 2 ],
+		"maul_blacklist": [ "LizardTemplate" ],
+		
+		"world_state": [ "marshaw", "Rivulet", "Red" ],
+		"perma_unlock_gates": false,
+		"expedition_enabled": true,
+		"cycle_length_min": 3.10,
+		"cycle_length_max": 6.10,
+		"expedition_description": "grey scug",
+		"start_room": [ "PD_S01", "HI_A16"],
+		"select_menu_scene": "Slugcat_marshaw",
+		"select_menu_scene_ascended": "Ghost_marshaw",
+		"sleep_scene": "sleep_marshaw"
+	}
+}

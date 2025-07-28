@@ -1,0 +1,5 @@
+Palette: 18
+EffectColorA: 9
+EffectColorB: 9
+PlacedObjects: DayNightSettings><210.1013><336.0775><-10~35.66025~23~10, 
+FadePalette: 10, 1
