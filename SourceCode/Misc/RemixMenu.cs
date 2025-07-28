@@ -29,8 +29,8 @@
                     new OpTab(this, Translate("Gameplay") ),
                     new OpTab(this, Translate("Marshaw") )
                     {
-                        colorCanvas= Color.gray,
-                        colorButton= Color.gray
+                        colorCanvas = Color.gray,
+                        colorButton = Color.gray
                     },
                 };
 

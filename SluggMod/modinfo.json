@@ -1,0 +1,12 @@
+﻿{
+	"id": "slugg.mod",
+	"name": "Marshawwwwwwwwwwwww",
+	"version": "0.1.2",
+	"target_game_version" :  "v1.10.4",
+	"authors": ["Slug (Pedro)", "TheVileOne"],
+	"description": "A slugcat thats was my first totally simple mod. <LINE> With the 'TheVileOne' help.<LINE><LINE>Also, its very, very recommended playing this mod with DLC Downpour, bc it allows Crafting Spears, and a Pup appearance.<LINE>But dont worry, its optional, besides the burdens ;)",
+	"requirements": [ "slime-cubed.slugbase", "bro.mergefix" ],
+	"requirements_names": [ "SlugBase ", "a Mergedmod fix" ],
+	"tags": [ "Custom Slugcat", "Slugg Productions" ],
+	"checksum_override_version" : false
+}

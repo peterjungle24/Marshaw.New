@@ -32,4 +32,7 @@ global using DLC_ObjType = DLCSharedEnums.AbstractObjectType;
 // Mods Libraries
 global using static Pom.Pom;
 
+// Shortened Names
+global using Randomf = UnityEngine.Random;
+
 // My Namespaces

@@ -109,7 +109,10 @@ namespace SourceCode.Slugcats
             if ( (crafter as Player).SlugCatClass == marshaw)
             {
                 // effects
-                crafter.room.PlaySound(SoundID.SS_AI_Give_The_Mark_Boom, crafter.firstChunk.pos);
+
+                //crafter.room.PlaySound(SoundID.SS_AI_Give_The_Mark_Boom, crafter.firstChunk.pos);
+                //crafter.room.AddObject(new TemplarCircle(crafter, crafter.firstChunk.pos, 10, 2f, 0f, 10, true) );
+
                 // ~effects
 
                 //return the method that allows you to make the spears, and more
