@@ -1,4 +1,7 @@
-﻿namespace SourceCode.RemixMenu
+﻿using HUD;
+using Menu.Remix;
+
+namespace SourceCode.RemixMenu
 {
     public static class RemixValues
     {
@@ -7,6 +10,7 @@
     public class REMIX_menuses : OptionInterface
     {
         public static bool initialized; //if was initialized
+        public static ManualLogSource logger { get => Plugin.logger; }
 
         public REMIX_menuses()
         {
@@ -81,5 +85,6 @@
 
             return tabArray;
         }
+
     }
 }
