@@ -47,10 +47,6 @@ namespace SourceCode
 
             /****************************************************/
 
-            /* CUSTOM SOUND */
-            Misc.DeathSounds.Initialize();
-            Misc.CustomSFX.Initialize();
-
             /* MENU REMIX */
             remix = new RemixMenu.REMIX_menuses();
             MachineConnector.SetRegisteredOI(ID, remix);
