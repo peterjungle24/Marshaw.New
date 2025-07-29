@@ -52,9 +52,30 @@ namespace SourceCode.POM
                     // checks if the BODY of the player its inside
                     if (rect.Contains(chunk.pos))
                     {
-                        Debug.Log("XBOX LIIIIIIIIIVE");
+                        ClimbFunction(plr);
                     }
                 }
+            }
+        }
+
+        private void ClimbFunction(Player self)
+        {
+            // direction variable
+            int direction = 0;
+            // according from the player directional input, wi  ll change the direction
+            // allows to "jump" at the same direction of the wall, instead of the opposite side
+            if (self.input[0].x < 0) direction = -1;
+            if (self.input[0].x > 0) direction = 1;
+
+            // keybind for "climb" upwards (upwards is the right word?)
+            // and also checks if the slide counter is upper than 0, we dont want to climb the non walls :monksilly:
+            if (self.input[0].y > 0 && self.wallSlideCounter > 0)
+            {
+                // jump
+                self.WallJump(direction);
+
+                Debug.Log("Something/ClimbFunction(Player self) -> here.");
+                logger.LogWarning("Something/ClimbFunction(Player self) -> here.");
             }
         }
     }
