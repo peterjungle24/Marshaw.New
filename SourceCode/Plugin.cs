@@ -1,4 +1,4 @@
-﻿using SourceCode.Pom.Features;
+﻿using SourceCode.POM;
 
 namespace SourceCode
 {
@@ -59,10 +59,10 @@ namespace SourceCode
         private void InitializePOM()
         {
             var objects = "Slugg objects";
-            var misc = "Slugg misc";
 
             // objects
-            RegisterManagedObject<Pom.Features.ClimbableSurface, ClimbableSurface_Data, ClimbableSurface_REPR>("Climbable Wall", objects, false);
-        }
+            //RegisterManagedObject<Defualt, Defualt_Data, Defualt_REPR>("Defualt", objects, false); (template one)
+            RegisterManagedObject<ClimbableSurface, ClimbableSurface_Data, ClimbableSurface_REPR>("Climbable Surface", objects, false);
+        }  
     }
 }
