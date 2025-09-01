@@ -18,7 +18,6 @@ global using BepInEx.Logging;
 
 // Slugbase (nescesary for that json file)
 global using SlugBase;
-global using SlugBase.Config;
 
 // Rain World ones
 global using MoreSlugcats;

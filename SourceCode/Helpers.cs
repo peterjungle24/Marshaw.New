@@ -7,6 +7,12 @@
             var thing = ((T)self.data);
             return thing.GetValue<bool>(field);
         }
+        public static int GetIntField<T>(PlacedObject self, string field) where T : ManagedData
+        {
+            var thing = ((T)self.data);
+            return thing.GetValue<int>(field);
+        }
+
         public static string GetStringField<T>(PlacedObject self, string field) where T : ManagedData
         {
             // make the cast inside the variable
