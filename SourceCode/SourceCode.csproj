@@ -9,70 +9,70 @@
 
   <ItemGroup>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\BepInEx.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx.Harmony">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\BepInEx.Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Preloader">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\BepInEx.Preloader.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\BepInEx.Harmony.dll</HintPath>
     </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\HOOKS-Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\HOOKS-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Data.Sqlite">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Mono.Data.Sqlite.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Common">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\MonoMod.Common.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\MonoMod.Common.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="Pom">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Pom.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Pom.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\PUBLIC-Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\PUBLIC-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="SlugBase">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\SlugBase.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\SlugBase.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\Unity.Mathematics.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.ScreenCaptureModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
