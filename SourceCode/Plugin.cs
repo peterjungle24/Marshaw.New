@@ -1,6 +1,6 @@
 ﻿using SourceCode.POM;
-using SlugBase.Features;
-using static SlugBase.Features.FeatureTypes;
+using SourceCode.LogUtilities;
+using LogUtils.Diagnostics.Tests;
 
 namespace SourceCode
 {
@@ -28,12 +28,13 @@ namespace SourceCode
 
         // the remix menu instance
         private static RemixMenu.REMIX_menuses remix;
-
-        // some features
+        private static ThisIsSoLogger coolLogger;
 
         // the core of the mod. hooks will do everything work :>
         public void OnEnable()
         {
+            coolLogger = new ThisIsSoLogger();
+
             // set logger
             logger = base.Logger;
 
@@ -42,28 +43,23 @@ namespace SourceCode
             // Initialize the POM objects
             InitializePOM();
 
-            // HOOKS - Slugcat.Marshaw
+            //---------------------------------------------------------------------------+
+            
             Slugcats.MarshawFeatures.Hooks();
-            // HOOKS - Slugcat.Slugg
             Slugcats.SluggFeatures.Hooks();
 
             On.RainWorldGame.Update += CoordOnClick;
-            On.Player.Update += BlinkUpdate;
+            On.Player.Jump += Player_Jump;
+
+            //---------------------------------------------------------------------------
         }
 
-        public enum PlayerBlink
+        private void Player_Jump(On.Player.orig_Jump orig, Player self)
         {
-            closed,
-            opened,
-            died,
-            stunned
-        }
-        private PlayerBlink blinks;
-        private void BlinkUpdate(On.Player.orig_Update orig, Player self, bool eu)
-        {
-            self.Blink(0);
+            coolLogger.Test();
+            coolLogger.Results();
 
-            orig(self, eu);
+            orig(self);
         }
 
         private void CoordOnClick(On.RainWorldGame.orig_Update orig, RainWorldGame self)
@@ -80,6 +76,8 @@ namespace SourceCode
         {
             // Logs to the file
             logger.LogInfo("I am fucking alive!");
+
+            coolLogger = new LogUtilities.ThisIsSoLogger();
 
             /****************************************************/
 
@@ -109,14 +107,6 @@ namespace SourceCode
             RegisterManagedObject<ToolTip, ToolTip_Data, ToolTip_REPR>("Tool Tip", helpers, false);
             RegisterManagedObject<Texted, Texted_Data, Texted_REPR>("Text Object", helpers, false);
         }
-
-        private void GetValueFromMatrix(ref Matrix4x4 matrix, out float value)
-        {
-            value = 0;
-
-            for (var row = 0; row < 4; row++)
-                for (var column = 0; column < 4; column++)
-                    value = matrix[row, column];
-        }
     }
 }
+

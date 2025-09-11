@@ -1,4 +1,5 @@
 ﻿using SourceCode.Helpers;
+using RegionObjects;
 
 namespace SourceCode.POM
 {
@@ -10,93 +11,14 @@ namespace SourceCode.POM
             this.owner = own;
         }
     }
-    public class Trianglez : UpdatableAndDeletable, IDrawable
+    public class Trianglez : Stalk
     {
-        PlacedObject self;
         ManualLogSource logger { get => Plugin.logger; }
 
         public Trianglez(Room room, PlacedObject obj)
         {
             this.room = room;
             this.self = obj;
-        }
-
-        public void InitiateSprites(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
-        {
-            // a new FSprite
-            sLeaser.sprites = new FSprite[1];
-
-            // initialize
-            var triarray = new TriangleMesh.Triangle[]
-            {
-                // support
-                new(0, 1, 2),
-                new(2, 1, 3),
-                new(3, 2, 4),
-                new(4, 3, 5),
-                new(5, 4, 6),
-                new(6, 5, 7),
-                new(7, 6, 8),
-                new(8, 7, 9),
-
-                // cool part
-                new(0, 2, 10),
-                new(0, 10, 12),
-                new(1, 3, 11),
-                new(1, 11, 13),
-            };
-            var triangle = new TriangleMesh("Futile_White", triarray, true, false);
-
-            // set the triangle instead
-            sLeaser.sprites[0] = triangle;
-
-            AddToContainer(sLeaser, rCam, null);
-        }
-        public void DrawSprites(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float Float, Vector2 camPos)
-        {
-            var tri = (sLeaser.sprites[0]) as TriangleMesh;
-            var position = self.pos - camPos;
-            /// my positions
-            var vertPos = new Vector2[]
-            {
-                // support
-                new(300, 300),
-                new(280, 300),
-                new(300, 280),
-                new(280, 280),
-                new(300, 260),
-                new(280, 260),
-                new(300, 240),
-                new(280, 240),
-                new(300, 220),
-                new(280, 220),
-
-                // cool thing
-                new(320, 300),
-                new(260, 300),
-                new(300, 320),
-                new(280, 320),
-            };
-
-            for (var i  = 0; i < vertPos.Length; i ++)
-            {
-                tri.MoveVertice(i, vertPos[i] );
-            }
-            for (var i = 5; i < vertPos.Length; i ++)
-            {
-                tri.color = Color.cyan;
-            }
-            
-        }
-        public void ApplyPalette(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, RoomPalette pal) { }
-        public void AddToContainer(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer fContainer)
-        {
-            fContainer ??= rCam.ReturnFContainer("HUD");
-
-            foreach (FSprite fsprite in sLeaser.sprites)
-            {
-                fContainer.AddChild(fsprite);
-            }
         }
     }
     public class Trianglez_REPR : ManagedRepresentation

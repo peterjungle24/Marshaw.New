@@ -4,76 +4,95 @@
     <TargetFramework>net48</TargetFramework> <!-- NEEDED, literally -->
 	<LangVersion>12</LangVersion> <!-- cool version -->
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable> <!-- i love this disabled -->
+    <Nullable>disable</Nullable>
+    <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\peter\OneDrive\Documentos\Github\Marshaw.New\SourceCode\bin\Debug\net48\LogUtils.xml</DocumentationFile> <!-- i love this disabled -->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\BepInEx.dll</HintPath>
-    </Reference>
-    <Reference Include="BepInEx.Harmony">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\BepInEx.Harmony.dll</HintPath>
+      <HintPath>lib\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\HOOKS-Assembly-CSharp.dll</HintPath>
+      <HintPath>lib\HOOKS-Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LogUtils">
+      <HintPath>lib\LogUtils.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.dll</HintPath>
+      <HintPath>lib\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>lib\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>lib\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>lib\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Sqlite">
+      <HintPath>lib\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod">
+      <HintPath>lib\MonoMod.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Common">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\MonoMod.Common.dll</HintPath>
+      <HintPath>lib\MonoMod.Common.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>lib\MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\MonoMod.Utils.dll</HintPath>
+      <HintPath>lib\MonoMod.Utils.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\rain World\mscorlib.dll</HintPath>
+      <HintPath>lib\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="Pom">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Pom.dll</HintPath>
+      <HintPath>lib\Pom.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\PUBLIC-Assembly-CSharp.dll</HintPath>
+      <HintPath>lib\PUBLIC-Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="SlugBase">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\SlugBase.dll</HintPath>
+      <HintPath>lib\SlugBase.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\Unity.Mathematics.dll</HintPath>
+      <HintPath>lib\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.dll</HintPath>
+      <HintPath>lib\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>lib\UnityEngine.InputModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>..\..\..\..\Desktop\Projects\C#\DLL\Rai Word - Watxer\UnityEngine.ScreenCaptureModule.dll</HintPath>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>lib\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\" />
   </ItemGroup>
 
 </Project>

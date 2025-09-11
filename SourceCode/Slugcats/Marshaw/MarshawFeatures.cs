@@ -49,7 +49,7 @@ namespace SourceCode.Slugcats
         #endregion
         #region CRAFTING
 
-        // <summary>
+        /// <summary>
         /// create the hooks for let the craft works
         /// </summary>
         /// <param name="orig"></param>
