@@ -50,8 +50,8 @@ namespace SourceCode.RemixMenu
             }
             catch (Exception eu)
             {
-                Debug.Log($">: remix_menu.cs/Initialize :<");
-                Debug.Log(eu);
+                UnityEngine.Debug.Log($">: remix_menu.cs/Initialize :<");
+                UnityEngine.Debug.Log(eu);
             }
         }
 

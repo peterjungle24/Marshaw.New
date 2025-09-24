@@ -1,47 +1,36 @@
-﻿using LogUtils;
-using LogUtils.Diagnostics;
-using LogUtils.Diagnostics.Tools;
-using LogUtils.Diagnostics.Tests;
-using LogUtils.Enums;
-using LogUtils.Helpers;
-using System.Reflection;
-
-namespace SourceCode.LogUtilities
+﻿
+namespace SourceCode.UnitTests
 {
-    public class ThisIsSoLogger : TestSuite, ITestable
+    public class UnitUtilsTest : TestCase
     {
-        public string Name => "<This Is So Logger Unit Test>";
+        private TestCase testcase;
         private LogUtils.Logger log;
-        private TestCase testCase;
         private Func<Color, string> f;
-        private bool data;
-        private string report;
-        
-        public ThisIsSoLogger()
+
+        public UnitUtilsTest(string name) : base(name)
         {
-            // instances a TestCase with my Name field
-            testCase = new TestCase(Name);
-            // instances a new Logger with Plugin.Logger as target
+            testcase = new TestCase(name);
             log = new LogUtils.Logger(Plugin.logger);
-            // just assigns the "f" to this method (foreground color)
-            f = LogConsole.AnsiColorConverter.AnsiToForeground;
-
-            // add tests on this current assembly.
-            // not that sure what is assembly but ok
-            base.AddTests(Assembly.GetExecutingAssembly());
+            f = LogUtils.Console.AnsiColorConverter.AnsiToForeground;
         }
-
         public void Test()
         {
-            // assert thing
-            testCase.AssertThat<bool>(data).IsTrue();
-        }
-        [PostTest]public void Results()
-        {
-            // create reports
-            report = testCase.CreateReport();
-            // log reports
-            log.LogImportant($"{f(new Color(66, 199, 101) )}{report}");
+            bool data0 = false;
+            testcase.AssertThat(data0).IsTrue();
+
+            int data1 = 0;
+            testcase.AssertThat<int>(data1).IsNotZero();
+
+            string data2 = "";
+            testcase.AssertThat<string>(data2).IsNull();
+
+            char data3 = '!';
+            testcase.AssertThat<char>(data3).IsEqualTo('?');
+
+
+            InterpolatedStringHandler handle = $"";
+
+            log.Log(handle);
         }
     }
 }

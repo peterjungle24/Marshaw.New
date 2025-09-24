@@ -31,9 +31,16 @@ global using DLC_ObjType = DLCSharedEnums.AbstractObjectType;
 // Mods Libraries
 global using static Pom.Pom;
 global using LogUtils;
-global using LogConsole = LogUtils.Console;
+global using LogUtils.Diagnostics;
+global using LogUtils.Diagnostics.Tools;
+global using LogUtils.Diagnostics.Tests;
+global using LogUtils.Enums;
+global using LogUtils.Helpers;
+global using System.Reflection;
 
 // Shortened Names
 global using Randomf = UnityEngine.Random;
+global using Debugf = UnityEngine.Debug;
+global using LogConsole = LogUtils.Console;
 
 // My Namespaces

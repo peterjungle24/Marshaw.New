@@ -74,7 +74,7 @@ namespace SourceCode.POM
                 // jump
                 self.WallJump(direction);
 
-                Debug.Log("Something/ClimbFunction(Player self) -> here.");
+                UnityEngine.Debug.Log("Something/ClimbFunction(Player self) -> here.");
                 logger.LogWarning("Something/ClimbFunction(Player self) -> here.");
             }
         }

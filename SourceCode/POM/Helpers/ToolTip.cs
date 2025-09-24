@@ -84,7 +84,7 @@
             if (RWCustom.Custom.InsideRect(new IntVector2((int) Input.mousePosition.x, (int) Input.mousePosition.y), rect) )
             {
                 //textAlpha = 1;
-                Debug.Log("mouse inside!");
+                UnityEngine.Debug.Log("mouse inside!");
             }
 
             /*

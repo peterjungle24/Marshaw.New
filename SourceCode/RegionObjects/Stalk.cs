@@ -78,6 +78,11 @@
             {
                 tri.MoveVertice(i, vertPos[i] + position);
             }
+            for (var i = 0; i < 3; i++)
+            {
+                tri.color = Color.blue;
+            }
+            tri.verticeColors[1] = Color.green;
         }
         public void ApplyPalette(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, RoomPalette pal) { }
         public void AddToContainer(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer fContainer)
