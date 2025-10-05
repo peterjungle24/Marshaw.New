@@ -6,7 +6,12 @@ namespace SourceCode.Utilities
     {
         public const string HoldButtonCircle = "HoldButtonCircle";
         public const string CustomDepth = "CustomDepth";
+
+        #region custom / forks
+        public const string slugg_CustomTextureDepth = "slugg.CustomTextureDepth";
         public const string Basic = "Basic";
+
+        #endregion
     }
     public class SluggShaders
     {
@@ -30,7 +35,7 @@ namespace SourceCode.Utilities
             {
                 // Log the paths to make sure
                 // C:/Program Files (x86)/Steam/steamapps/common/Rain World/RainWorld_Data/StreamingAssets\sluggshaders\testingshader
-                var file = PathHelpers.GetModFolder() + "/sluggShaders/TestingShader";
+                var file = PathHelpers.GetModFolder() + "/sluggShaders/sluggshaders";
                 // C:/Program Files (x86)/Steam/steamapps/common/Rain World/RainWorld_Data/StreamingAssets/sluggshaders/testingshader
                 var replace = file.Replace('\\', '/');
 
@@ -40,7 +45,7 @@ namespace SourceCode.Utilities
                 // ASSET BUNDLE MOMENTOS :)
                 AssetBundle assetBundle = AssetBundle.LoadFromFile(replace);
                 // this one its being null.
-                self.Shaders.Add("slugg.TestingShader", FShader.CreateShader("slugg.TestingShader", assetBundle.LoadAsset<Shader>("Assets/Shaders/TestingShader.shader")));
+                self.Shaders.Add(Shaders.slugg_CustomTextureDepth, FShader.CreateShader(Shaders.slugg_CustomTextureDepth, assetBundle.LoadAsset<Shader>("Assets/Shaders/CustomTextureDepth.shader")));
             }
             catch (Exception ex)
             {

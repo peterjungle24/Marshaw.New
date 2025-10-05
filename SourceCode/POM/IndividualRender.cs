@@ -32,10 +32,8 @@ namespace SourceCode.POM
         public float scale;
         [FloatField("alpha", 0f, 1f, 1f, 0.1f, ManagedFieldWithPanel.ControlType.slider, "Alpha")]
         public float alpha;
-        [BooleanField("useShader", false, ManagedFieldWithPanel.ControlType.button, "Use Shader")]
-        public bool useShader;
-        [IntegerField("palette", 0, int.MaxValue, 0, ManagedFieldWithPanel.ControlType.arrows, "Palette")]
-        public int palette;
+        [ColorField("tint", 1,1,1,1, ManagedFieldWithPanel.ControlType.button, "Tint")]
+        public Color tint;
 
         //the custom fields are added as a parameter for the base class
         public IndividualRender_Data(PlacedObject own) : base(own, null)
@@ -51,8 +49,7 @@ namespace SourceCode.POM
         string fileName;
         float scale;
         float alpha;
-        bool useShader;
-        int palette;
+        Color tint;
 
         public IndividualRender(Room room, PlacedObject obj)
         {
@@ -64,10 +61,9 @@ namespace SourceCode.POM
 
         public override void Update(bool eu)
         {
-            palette = PomHelpers.GetIntField<IndividualRender_Data>(self, "palette");
             scale = PomHelpers.GetFloatField<IndividualRender_Data>(self, "scale");
             alpha = PomHelpers.GetFloatField<IndividualRender_Data>(self, "alpha");
-            useShader = PomHelpers.GetBoolField<IndividualRender_Data>(self, "useShader");
+            tint = PomHelpers.GetColorField<IndividualRender_Data>(self, "tint");
             container = (ContainerLayers)PomHelpers.GetEnumField<IndividualRender_Data, ContainerLayers>(self, "container");
         }
 
@@ -77,7 +73,7 @@ namespace SourceCode.POM
 
             try
             {
-                sLeaser.sprites[0] = new FSprite(Futile.atlasManager.LoadImage(PathHelpers.GetFile(fileName) ).name, true);
+                sLeaser.sprites[0] = new FSprite(PathHelpers.GetFSpriteImage(fileName), true);
             }
             catch (FutileException exception)
             {
@@ -85,25 +81,21 @@ namespace SourceCode.POM
                 logger.LogError($"\n{exception}\n");
             }
 
+            sLeaser.sprites[0].shader = rCam.game.rainWorld.Shaders[Shaders.slugg_CustomTextureDepth];
+
             AddToContainer(sLeaser, rCam, null);
         }
         public void DrawSprites(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float Float, Vector2 camPos)
         {
             var position = new Vector2(self.pos.x - camPos.x, self.pos.y - camPos.y);
 
-            if (useShader == true) { sLeaser.sprites[0].shader = rCam.game.rainWorld.Shaders["slugg.TestingShader"]; }
-            else sLeaser.sprites[0].shader = rCam.game.rainWorld.Shaders[Shaders.Basic];
-
-            var depth = sLeaser.sprites[0].depth;
-            depth = palette;
-            
+            sLeaser.sprites[0].color = tint;
             sLeaser.sprites[0].x = position.x;
             sLeaser.sprites[0].y = position.y;
             sLeaser.sprites[0].alpha = alpha;
             sLeaser.sprites[0].scale = scale;
         }
-        public void ApplyPalette(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, RoomPalette pal)
-        { }
+        public void ApplyPalette(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, RoomPalette pal) { }
         public void AddToContainer(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, FContainer fContainer)
         {
             fContainer ??= rCam.ReturnFContainer(container.ToString() );

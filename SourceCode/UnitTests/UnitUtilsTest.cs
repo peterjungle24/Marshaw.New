@@ -1,4 +1,9 @@
-﻿
+﻿using UnityEngine;
+using LogUtils;
+using LogUtils.Diagnostics;
+using LogUtils.Diagnostics.Tests;
+using LogUtils.Helpers;
+
 namespace SourceCode.UnitTests
 {
     public class UnitUtilsTest : TestCase

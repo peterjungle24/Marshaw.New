@@ -3,6 +3,7 @@ using SourceCode.UnitTests;
 using LogUtils.Diagnostics.Tests;
 using SourceCode.Helpers;
 using SourceCode.Utilities;
+using SourceCode;
 
 namespace SourceCode
 {
@@ -11,13 +12,12 @@ namespace SourceCode
     [BepInPlugin(ID, NAME, VERSION)]
     public class Plugin : BaseUnityPlugin
     {
-        // the Marshaw scug id
+        // the slugcats ids
         public static readonly SlugcatStats.Name slgMarshaw = new SlugcatStats.Name("slugg.slugcat.marshaw");
         public static readonly SlugcatStats.Name slgSlugg = new SlugcatStats.Name("slugg.slugcat.slugg");
+        // i fucking like this one, it stores my mod ID globally
         public static string modID { get => ID; }
         
-        // the features
-
         // the fucking logger to use.
         public static ManualLogSource logger;
         // cool font
@@ -28,9 +28,9 @@ namespace SourceCode
         private const string ID = "slugg.mod";
         private const string NAME = "Marshawwwwwwwwwwwww";
         private const string VERSION = "0.1.2";
+        // nice utilities
         private Func<Color, string> f;
         private LogUtils.Logger log;
-        private UnitUtilsTest test;
 
         // the remix menu instance
         private static RemixMenu.REMIX_menuses remix;
@@ -47,28 +47,30 @@ namespace SourceCode
             InitializePOM();
 
             //---------------------------------------------------------------------------+
-            
-            // Slugcats
+
+            #region Slugcats
             Slugcats.MarshawFeatures.Hooks();
             Slugcats.SluggFeatures.Hooks();
+            #endregion
+            #region Creatures
 
+            #region lizards
+            Creatures.Lizards.LizardTest_Hooks.OnHooks();
+            #endregion
+
+            #endregion
+            #region Objects
+            Objects.TestingObject.OnHooks();
+            #endregion
+            #region Misc
             SluggShaders.Hooks();
+            #endregion
 
             On.RainWorldGame.Update += CoordOnClick;
-            On.Player.Jump += Player_Jump;
 
             //---------------------------------------------------------------------------
         }
 
-        private void Player_Jump(On.Player.orig_Jump orig, Player self)
-        {
-            test.Test();
-
-            var report = test.CreateReport();
-            log.LogDebug(report);
-
-            orig(self);
-        }
         private void CoordOnClick(On.RainWorldGame.orig_Update orig, RainWorldGame self)
         {
             if (Input.GetMouseButtonDown(1) )
@@ -87,10 +89,8 @@ namespace SourceCode
                 // Logs to the file
                 log.LogInfo($"{f(new Color(255, 119, 0) ) }I am fucking alive!");
 
-                test = new UnitUtilsTest("Cool name for this test in specific");
-
                 // ascii my beloved
-                var hidden = FunHelpers.BytesArrayAsString(new byte[] { 66, 114, 111, 32, 105, 32, 114, 101, 97, 108, 108, 121, 32, 108, 105, 107, 101, 32, 116, 104, 105, 115, 32, 119, 97, 121 });
+                var hidden = MyMessages.ChoseRandomMessages();
                 log.Log($"{f(Color.yellow)}{hidden}");
 
                 /****************************************************/
@@ -125,6 +125,7 @@ namespace SourceCode
             RegisterManagedObject<PaletteTrigger, PaletteTrigger_Data, PaletteTrigger_REPR>("Palette Trigger", objects, false);
             RegisterManagedObject<GreenScreen, GreenScreen_Data, GreenScreen_REPR>("Green Screen", objects, false);
             RegisterManagedObject<IndividualRender, IndividualRender_Data, IndividualRender_REPR>("Individual Render", objects, false);
+            RegisterManagedObject<Hitbox, Hitbox_Data, Hitbox_REPR>("No Gravity Area", objects, false);
 
             RegisterManagedObject<ToolTip, ToolTip_Data, ToolTip_REPR>("Tool Tip", helpers, false);
             RegisterManagedObject<Texted, Texted_Data, Texted_REPR>("Text Object", helpers, false);

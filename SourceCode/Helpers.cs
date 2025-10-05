@@ -48,14 +48,32 @@
     }
     public static class PathHelpers
     {
+        /// <summary>
+        /// Just gets the mod folder
+        /// </summary>
+        /// <returns></returns>
         public static string GetModFolder()
         {
-            return Path.GetDirectoryName(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            return Path.GetDirectoryName(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) );
         }
+        /// <summary>
+        /// Gets a file inside the mod folder
+        /// </summary>
+        /// <returns>the file path, aka the file itself</returns>
         public static string GetFile(string file)
         {
             var path = GetModFolder();
             return path + "/" + file;
+        }
+        /// <summary>
+        /// Gets a file image, for FSprite constructors
+        /// </summary>
+        /// <remarks>PLEASE DONT SPECIFY THE FILE EXTENSION, I STRUGGLED A LOT WITH THIS</remarks>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public static string GetFSpriteImage(string file)
+        {
+            return Futile.atlasManager.LoadImage(PathHelpers.GetFile(file)).name;
         }
     }
     public static class FunHelpers
