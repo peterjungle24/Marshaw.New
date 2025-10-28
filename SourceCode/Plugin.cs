@@ -31,8 +31,6 @@ namespace SourceCode
         private const string ID = "slugg.mod";
         private const string NAME = "Marshawwwwwwwwwwwww";
         private const string VERSION = "0.1.2";
-        // nice utilities
-        private Func<Color, string> f;
         private LogUtils.Logger log;
 
         // the remix menu instance
