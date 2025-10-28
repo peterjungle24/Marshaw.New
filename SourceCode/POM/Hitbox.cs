@@ -20,7 +20,6 @@ namespace SourceCode.POM
         PlacedObject self;
         ManualLogSource logger { get => Plugin.logger; }
         Vector2 scale;
-        //BodyChunk[] bodyChunks;
 
         public Hitbox(Room room, PlacedObject obj)
         {
@@ -28,8 +27,6 @@ namespace SourceCode.POM
             this.self = obj;
 
             scale = Helpers.PomHelpers.GetVector2Field<Hitbox_Data>(self, "scale");
-            //this.bodyChunks = new BodyChunk[1];
-            //this.bodyChunks[0] = new BodyChunk(obj., 0, self.pos, scale.magnitude, 0.25f);
         }
 
         public void InitiateSprites(RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)

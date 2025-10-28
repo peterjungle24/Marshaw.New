@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SourceCode</name>
+    </assembly>
+    <members>
+        <member name="M:SourceCode.Helpers.PathHelpers.GetModFolder">
+            <summary>
+            Just gets the mod folder
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SourceCode.Helpers.PathHelpers.GetFile(System.String)">
+            <summary>
+            Gets a file inside the mod folder
+            </summary>
+            <returns>the file path, aka the file itself</returns>
+        </member>
+        <member name="M:SourceCode.Helpers.PathHelpers.GetFSpriteImage(System.String)">
+            <summary>
+            Gets a file image, for FSprite constructors
+            </summary>
+            <remarks>PLEASE DONT SPECIFY THE FILE EXTENSION, I STRUGGLED A LOT WITH THIS</remarks>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SourceCode.Slugcats.MarshawFeatures.PostMotsInitialize(On.RainWorld.orig_PostModsInit,RainWorld)">
+            <summary>
+            create the hooks for let the craft works
+            </summary>
+            <param name="orig"></param>
+            <param name="self"></param>
+        </member>
+        <member name="M:SourceCode.Slugcats.MarshawFeatures.Grasps(On.Player.orig_GraspsCanBeCrafted,Player)">
+            <summary>
+            Manages some grasps for the specific slugcat (marshaw)
+            </summary>
+            <param name="orig"></param>
+            <param name="self"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SourceCode.Slugcats.MarshawFeatures.GourmanCombos(On.MoreSlugcats.GourmandCombos.orig_CraftingResults,PhysicalObject,Creature.Grasp,Creature.Grasp)">
+            <summary> The combos manager, where it will use the "Craft" method for craft things </summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.MarshawFeatures.Craft(Player,Creature.Grasp,Creature.Grasp)">
+            <summary>
+            The recipes of craftings are stored here, allowing any ingrendient
+            </summary>
+            <returns>a result of the craft from 2 specific items listed here</returns>
+        </member>
+        <member name="M:SourceCode.Slugcats.MarshawFeatures.CraftingHelper(Creature.Grasp,Creature.Grasp,AbstractPhysicalObject.AbstractObjectType,AbstractPhysicalObject.AbstractObjectType)">
+            <summary>
+            Just a grasps helper for short the code.
+            </summary>
+            <param name="graspA">The first hand</param>
+            <param name="graspB">The second hand</param>
+            <param name="obj1">The first object to be the ingredient</param>
+            <param name="obj2">The second object to be the ingredient</param>
+            <returns></returns>
+        </member>
+        <member name="F:SourceCode.Utilities.SluggShaders.log">
+            My Shaders
+        </member>
+    </members>
+</doc>

@@ -28,6 +28,8 @@ namespace SourceCode.Objects
         private Vector2 lastRotation;
         private Vector2? setRotation;
         #endregion
+        private static LogUtils.Logger log { get => new LogUtils.Logger(Plugin.logger); }
+        private static Func<Color, string> f = LogConsole.AnsiColorConverter.AnsiToForeground;
 
         public TestingObject(AbstractPhysicalObject abstractPhysicalObject, Vector2 lastRotation = default, Vector2 rotation = default, Vector2? setRotation = null) : base(abstractPhysicalObject)
         {
@@ -66,6 +68,8 @@ namespace SourceCode.Objects
         
         public static void OnHooks()
         {
+            log.Log($"{f(FunHelpers.RGB(148, 82, 41))}<TestingObject> was called! (a good thing?)");
+
             On.SandboxGameSession.SpawnItems += Spawn;
             On.Player.Grabability += OnGrabbed;
         }

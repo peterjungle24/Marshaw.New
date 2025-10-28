@@ -81,7 +81,7 @@ namespace SourceCode.POM
                 logger.LogError($"\n{exception}\n");
             }
 
-            sLeaser.sprites[0].shader = rCam.game.rainWorld.Shaders[Shaders.slugg_CustomTextureDepth];
+            sLeaser.sprites[0].shader = rCam.game.rainWorld.Shaders[ShaderList.slugg_CustomTextureDepth];
 
             AddToContainer(sLeaser, rCam, null);
         }

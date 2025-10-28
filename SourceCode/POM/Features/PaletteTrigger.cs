@@ -57,16 +57,11 @@ namespace SourceCode.POM
                     // checks if the BODY of the player its inside
                     if (rect.Contains(chunk.pos) && state == false)
                     {
-                        ChangePalette(rcam);
+                        rcam.ChangeMainPalette(palette);
                         state = true;
                     }
                 }
             }
-        }
-
-        private void ChangePalette(RoomCamera rcam)
-        {
-            rcam.ChangeMainPalette(palette);
         }
     }
     public class PaletteTrigger_REPR : ManagedRepresentation

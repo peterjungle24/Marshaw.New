@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SourceCode.Helpers;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,8 @@ namespace SourceCode.Creatures.Lizards
 
         public static void OnHooks()
         {
+            log.Log($"{f(FunHelpers.RGB(148, 82, 41) ) }<LizardTestHooks> was called! (a good thing?)");
+
             // functional
             On.RainWorld.Awake += AddMultiplayerUnlocks;
             On.StaticWorld.InitCustomTemplates += InitializeCustomTemplate;
@@ -194,7 +197,6 @@ namespace SourceCode.Creatures.Lizards
             // all of this should run the code within inside of this condition:
             // if (self.lizard.Template.type == LizardTest_Enums.CTTlizardTest)
             On.LizardGraphics.InitiateSprites += InitiateSprites;
-            On.LizardGraphics.DrawSprites += DrawSprites;
         }
 
         private static void InitiateSprites(On.LizardGraphics.orig_InitiateSprites orig, LizardGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam)
@@ -206,11 +208,5 @@ namespace SourceCode.Creatures.Lizards
 
             orig(self, sLeaser, rCam);
         }
-        private static void DrawSprites(On.LizardGraphics.orig_DrawSprites orig, LizardGraphics self, RoomCamera.SpriteLeaser sLeaser, RoomCamera rCam, float timeStacker, Vector2 camPos)
-        {
-            
-            orig(self, sLeaser, rCam, timeStacker, camPos);
-        }
-        
     }
 }

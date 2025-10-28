@@ -1,9 +1,13 @@
 ﻿using SourceCode.POM;
-using SourceCode.UnitTests;
 using LogUtils.Diagnostics.Tests;
 using SourceCode.Helpers;
 using SourceCode.Utilities;
 using SourceCode;
+using Fisobs.Core;
+using SourceCode.Objects;
+using LogUtils;
+using LogUtils.Enums;
+using LogUtils.Properties;
 
 namespace SourceCode
 {
@@ -17,7 +21,6 @@ namespace SourceCode
         public static readonly SlugcatStats.Name slgSlugg = new SlugcatStats.Name("slugg.slugcat.slugg");
         // i fucking like this one, it stores my mod ID globally
         public static string modID { get => ID; }
-        
         // the fucking logger to use.
         public static ManualLogSource logger;
         // cool font
@@ -43,19 +46,26 @@ namespace SourceCode
 
             // Initialize logging. Useful for see if the mod is actually working.
             On.RainWorld.OnModsInit += Initialize;
+            // Add room scripts
+            AddRoomScripts();
+
+            MyLogID();
+
             // Initialize the POM objects
             InitializePOM();
-
+            
             //---------------------------------------------------------------------------+
 
             #region Slugcats
             Slugcats.MarshawFeatures.Hooks();
+
             Slugcats.SluggFeatures.Hooks();
+            //Slugcats.SluggGraphics.Hooks();
             #endregion
             #region Creatures
 
             #region lizards
-            Creatures.Lizards.LizardTest_Hooks.OnHooks();
+            // i moved to somewhere
             #endregion
 
             #endregion
@@ -64,34 +74,31 @@ namespace SourceCode
             #endregion
             #region Misc
             SluggShaders.Hooks();
+            //MyTrigger_Hooks.OnHooks();
             #endregion
-
-            On.RainWorldGame.Update += CoordOnClick;
 
             //---------------------------------------------------------------------------
         }
 
-        private void CoordOnClick(On.RainWorldGame.orig_Update orig, RainWorldGame self)
-        {
-            if (Input.GetMouseButtonDown(1) )
-            {
-                logger.LogInfo($"[{Input.mousePosition.x}], [{Input.mousePosition.y}]");
-                UnityEngine.Debug.Log($"[{Input.mousePosition.x}], [{Input.mousePosition.y}]");
-            }
-            orig(self);
-        }
         private void Initialize(On.RainWorld.orig_OnModsInit orig, RainWorld self)
         {
+            // ALWAYS REMEMBER TO CALL THE ORIG AT SOMEWHERE
+            orig(self);
+
             try
             {
+                // register Fisobs objects and creatures
+                RegisterFisobs();
+
                 log = new LogUtils.Logger(logger);
-                f = LogConsole.AnsiColorConverter.AnsiToForeground;
-                // Logs to the file
-                log.LogInfo($"{f(new Color(255, 119, 0) ) }I am fucking alive!");
 
                 // ascii my beloved
                 var hidden = MyMessages.ChoseRandomMessages();
-                log.Log($"{f(Color.yellow)}{hidden}");
+                log.Log($"{Color.yellow}{hidden}");
+
+                /****************************************************/
+
+                Creatures.Lizards.LizardTest_Hooks.OnHooks();
 
                 /****************************************************/
 
@@ -103,9 +110,6 @@ namespace SourceCode
                 MachineConnector.SetRegisteredOI(ID, remix);
 
                 /****************************************************/
-
-                // ALWAYS REMEMBER TO CALL THE ORIG AT SOMEWHERE
-                orig(self);
             }
             catch (Exception ex)
             {
@@ -116,8 +120,7 @@ namespace SourceCode
         private void InitializePOM()
         {
             var objects = "Slugg objects";
-            var helpers = "Slugg Helpers";
-
+            
             // objects
             //RegisterManagedObject<Defualt, Defualt_Data, Defualt_REPR>("Defualt", objects, false); (template one)
             RegisterManagedObject<ClimbableSurface, ClimbableSurface_Data, ClimbableSurface_REPR>("Climbable Surface", objects, false);
@@ -125,10 +128,34 @@ namespace SourceCode
             RegisterManagedObject<PaletteTrigger, PaletteTrigger_Data, PaletteTrigger_REPR>("Palette Trigger", objects, false);
             RegisterManagedObject<GreenScreen, GreenScreen_Data, GreenScreen_REPR>("Green Screen", objects, false);
             RegisterManagedObject<IndividualRender, IndividualRender_Data, IndividualRender_REPR>("Individual Render", objects, false);
-            RegisterManagedObject<Hitbox, Hitbox_Data, Hitbox_REPR>("No Gravity Area", objects, false);
+            RegisterManagedObject<MyTrigger, MyTrigger_Data, MyTrigger_REPR>("My Trigger", objects, false);
 
-            RegisterManagedObject<ToolTip, ToolTip_Data, ToolTip_REPR>("Tool Tip", helpers, false);
-            RegisterManagedObject<Texted, Texted_Data, Texted_REPR>("Text Object", helpers, false);
+        }
+        private void RegisterFisobs()
+        {
+            CustomObject_Hooks.OnHooks();
+
+            Content.Register(new CustomObjectFisob() );
+        }
+        private void AddRoomScripts()
+        {
+            On.RoomSpecificScript.AddRoomSpecificScript += (On.RoomSpecificScript.orig_AddRoomSpecificScript orig, Room room) =>
+            {
+                if (room.abstractRoom.name == "SU_A24")
+                {
+                    if (room.game.IsStorySession)
+                        room.AddObject(new RoomScripts.RSCR_WhateverIsThis(room) );
+                }
+            };
+        }
+
+        protected private void MyLogID()
+        {
+            var myLog = new LogID("pedro.log", LogAccess.FullAccess, true);
+            var properties = new LogProperties("pedro.log");
+            var log = new LogUtils.Logger(myLog);
+
+            log.LogInfo("\nWhat The Hell????\n");
         }
     }
 }

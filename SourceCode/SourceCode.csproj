@@ -8,7 +8,8 @@
     <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>C:\Users\peter\OneDrive\Documentos\Github\Marshaw.New\SourceCode\bin\Debug\net48\LogUtils.xml</DocumentationFile> <!-- i love this disabled -->
+    <DocumentationFile>C:\Users\peter\OneDrive\Documentos\Github\Marshaw.New\SourceCode\lib\LogUtils.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\peter\OneDrive\Documentos\Github\Marshaw.New\SourceCode\lib\fisobs.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,6 +23,12 @@
   <ItemGroup>
     <Reference Include="BepInEx">
       <HintPath>lib\BepInEx.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpeditionRegionSupport">
+      <HintPath>lib\ExpeditionRegionSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Fisobs">
+      <HintPath>lib\Fisobs.dll</HintPath>
     </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
       <HintPath>lib\HOOKS-Assembly-CSharp.dll</HintPath>
@@ -64,6 +71,15 @@
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>lib\PUBLIC-Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired.Runtime">
+      <HintPath>lib\Rewired.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>lib\Rewired_Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Rewired_Windows">
+      <HintPath>lib\Rewired_Windows.dll</HintPath>
     </Reference>
     <Reference Include="SlugBase">
       <HintPath>lib\SlugBase.dll</HintPath>

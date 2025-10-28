@@ -2,7 +2,7 @@
 using UnityEngine;
 namespace SourceCode.Utilities
 {
-    public class Shaders
+    public class ShaderList
     {
         public const string HoldButtonCircle = "HoldButtonCircle";
         public const string CustomDepth = "CustomDepth";
@@ -45,7 +45,7 @@ namespace SourceCode.Utilities
                 // ASSET BUNDLE MOMENTOS :)
                 AssetBundle assetBundle = AssetBundle.LoadFromFile(replace);
                 // this one its being null.
-                self.Shaders.Add(Shaders.slugg_CustomTextureDepth, FShader.CreateShader(Shaders.slugg_CustomTextureDepth, assetBundle.LoadAsset<Shader>("Assets/Shaders/CustomTextureDepth.shader")));
+                self.Shaders.Add(ShaderList.slugg_CustomTextureDepth, FShader.CreateShader(ShaderList.slugg_CustomTextureDepth, assetBundle.LoadAsset<Shader>("Assets/Shaders/CustomTextureDepth.shader")));
             }
             catch (Exception ex)
             {
