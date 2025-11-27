@@ -24,6 +24,20 @@
             <param name="file"></param>
             <returns></returns>
         </member>
+        <member name="M:SourceCode.Helpers.FunHelpers.BytesArrayAsString(System.Byte[])">
+            <summary>Just turns a ASCII table (in the bytes arrays) to string.</summary>
+            <param name="bytes">the byte array used to check the ASCII</param>
+            <returns>Translated string from bytes</returns>
+        </member>
+        <member name="M:SourceCode.Helpers.FunHelpers.RGB(System.Single,System.Single,System.Single)">
+            <summary>
+            Returns a new color using RGB instead
+            </summary>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
         <member name="M:SourceCode.Slugcats.MarshawFeatures.PostMotsInitialize(On.RainWorld.orig_PostModsInit,RainWorld)">
             <summary>
             create the hooks for let the craft works
@@ -58,7 +72,7 @@
             <param name="obj2">The second object to be the ingredient</param>
             <returns></returns>
         </member>
-        <member name="F:SourceCode.Utilities.SluggShaders.log">
+        <member name="P:SourceCode.Utilities.SluggShaders.log">
             My Shaders
         </member>
     </members>

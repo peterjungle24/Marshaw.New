@@ -18,7 +18,7 @@ namespace SourceCode.POM
     public class Hitbox : UpdatableAndDeletable, IDrawable
     {
         PlacedObject self;
-        ManualLogSource logger { get => Plugin.logger; }
+        LogUtils.Logger logger { get => Plugin.log; }
         Vector2 scale;
 
         public Hitbox(Room room, PlacedObject obj)

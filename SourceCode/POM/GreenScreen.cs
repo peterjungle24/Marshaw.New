@@ -3,7 +3,6 @@ using SourceCode.Utilities;
 
 namespace SourceCode.POM
 {
-    
     public class GreenScreen_Data : ManagedData
     {
         [EnumField<ContainerLayers>(
@@ -40,7 +39,7 @@ namespace SourceCode.POM
     public class GreenScreen : UpdatableAndDeletable, IDrawable
     {
         PlacedObject self;
-        ManualLogSource logger { get => Plugin.logger; }
+        private static LogUtils.Logger logger => Plugin.log;
         ContainerLayers container;
         Vector2 scale;
 
@@ -48,7 +47,6 @@ namespace SourceCode.POM
         {
             this.room = room;
             this.self = obj;
-
         }
         public override void Update(bool eu)
         {

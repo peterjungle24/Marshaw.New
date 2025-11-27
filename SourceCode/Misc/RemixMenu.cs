@@ -10,7 +10,7 @@ namespace SourceCode.RemixMenu
     public class REMIX_menuses : OptionInterface
     {
         public static bool initialized; //if was initialized
-        public static ManualLogSource logger { get => Plugin.logger; }
+        public static LogUtils.Logger logger { get => Plugin.log; }
 
         public REMIX_menuses()
         {

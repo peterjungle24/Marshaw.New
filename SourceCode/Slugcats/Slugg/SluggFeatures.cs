@@ -3,10 +3,10 @@ using SourceCode.RemixMenu;
 
 namespace SourceCode.Slugcats
 {
-    internal class SluggFeatures
+    public class SluggFeatures
     {
         public static SlugcatStats.Name slugg { get => SourceCode.Plugin.slgSlugg; }
-        public static ManualLogSource Logger { get => SourceCode.Plugin.logger; }
+        private static LogUtils.Logger logger => Plugin.log;
 
         public static void Hooks()
         {

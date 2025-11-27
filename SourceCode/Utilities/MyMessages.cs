@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SourceCode.Utilities
 {
-    internal static class MyMessages
+    public static class MyMessages
     {
         public static string ChoseRandomMessages()
         {

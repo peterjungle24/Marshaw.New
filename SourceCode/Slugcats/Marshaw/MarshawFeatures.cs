@@ -7,7 +7,7 @@ namespace SourceCode.Slugcats
     public class MarshawFeatures
     {
         public static SlugcatStats.Name marshaw { get => SourceCode.Plugin.slgMarshaw; }    //name of my slugcat
-        public static ManualLogSource Logger { get => SourceCode.Plugin.logger; }
+        public static LogUtils.Logger Logger { get => SourceCode.Plugin.log; }
 
         public static void Hooks()
         {

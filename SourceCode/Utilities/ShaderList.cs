@@ -16,12 +16,11 @@ namespace SourceCode.Utilities
     public class SluggShaders
     {
         /// My Shaders
-        private static LogUtils.Logger log;
+        private static LogUtils.Logger log => Plugin.log;
         private static Func<Color, string> f;
 
         public static void Hooks()
         {
-            log = new LogUtils.Logger(Plugin.logger);
             f = LogUtils.Console.AnsiColorConverter.AnsiToForeground;
 
             On.RainWorld.LoadResources += LoadShaders;

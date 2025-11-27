@@ -44,7 +44,7 @@ namespace SourceCode.POM
     public class IndividualRender : UpdatableAndDeletable, IDrawable
     {
         PlacedObject self;
-        ManualLogSource logger { get => Plugin.logger; }
+        LogUtils.Logger logger { get => Plugin.log; }
         ContainerLayers container;
         string fileName;
         float scale;

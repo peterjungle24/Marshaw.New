@@ -20,7 +20,7 @@ namespace SourceCode.POM
     }
     public class ClimbableSurface : UpdatableAndDeletable
     {
-        ManualLogSource logger { get => Plugin.logger; }
+        LogUtils.Logger logger { get => Plugin.log; }
         PlacedObject self;
         Vector2 scale;
 

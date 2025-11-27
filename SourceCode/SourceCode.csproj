@@ -27,9 +27,6 @@
     <Reference Include="ExpeditionRegionSupport">
       <HintPath>lib\ExpeditionRegionSupport.dll</HintPath>
     </Reference>
-    <Reference Include="Fisobs">
-      <HintPath>lib\Fisobs.dll</HintPath>
-    </Reference>
     <Reference Include="HOOKS-Assembly-CSharp">
       <HintPath>lib\HOOKS-Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -108,6 +105,10 @@
     <Reference Include="UnityEngine.JSONSerializeModule">
       <HintPath>lib\UnityEngine.JSONSerializeModule.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Objects\" />
   </ItemGroup>
 
 </Project>

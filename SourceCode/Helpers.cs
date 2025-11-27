@@ -78,6 +78,9 @@
     }
     public static class FunHelpers
     {
+        /// <summary>Just turns a ASCII table (in the bytes arrays) to string.</summary>
+        /// <param name="bytes">the byte array used to check the ASCII</param>
+        /// <returns>Translated string from bytes</returns>
         public static string BytesArrayAsString(byte[] bytes)
         {
             string str = "";
@@ -89,6 +92,13 @@
 
             return str;
         }
+        /// <summary>
+        /// Returns a new color using RGB instead
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="g"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static Color RGB(float r, float g, float b)
         {
             return new Color(r /255, g /255, b /255);

@@ -13,7 +13,7 @@ namespace SourceCode.POM
     }
     public class Trianglez : Stalk
     {
-        ManualLogSource logger { get => Plugin.logger; }
+        LogUtils.Logger logger { get => Plugin.log; }
 
         public Trianglez(Room room, PlacedObject obj)
         {

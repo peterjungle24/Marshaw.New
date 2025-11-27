@@ -11,7 +11,7 @@
     public class Defualt : UpdatableAndDeletable
     {
         PlacedObject self;
-        ManualLogSource logger { get => Plugin.logger; }
+        LogUtils.Logger logger { get => Plugin.log; }
 
         public Defualt(Room room, PlacedObject obj)
         {

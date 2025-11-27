@@ -21,7 +21,7 @@ namespace SourceCode.POM
         public static OnTrigger onTriggerEvent;
         public static string Id;
         public string id;
-        LogUtils.Logger logger { get => new LogUtils.Logger(Plugin.logger); }
+        LogUtils.Logger logger => Plugin.log;
         PlacedObject self;
         Vector2 scale;
 

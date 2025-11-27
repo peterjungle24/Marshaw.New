@@ -6,7 +6,7 @@ using SourceCode;
 
 namespace SourceCode.Slugcats.Marshaw
 {
-    internal class SanitySystem
+    public class SanitySystem
     {
     }
 }
