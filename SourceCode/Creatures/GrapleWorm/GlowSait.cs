@@ -12,8 +12,8 @@ namespace SourceCode.Creatures.GrapleWorm
     public static class GlowSaitEnums
     {
         //If you use the same string name, you can use it like ID in World File [ world_PD.txt ]
-        public static readonly CreatureTemplate.Type creatureTemplateType = new(nameof(GlowSait), true);
-        public static readonly MultiplayerUnlocks.SandboxUnlockID sandboxUnlockID = new(nameof(GlowSait), true);
+        public static CreatureTemplate.Type creatureTemplateType => Enum_CreatureTemplateType.GlowSait;
+        public static MultiplayerUnlocks.SandboxUnlockID sandboxUnlockID => Enum_SandboxUnlockID.GlowSait;
     }
     public class GlowSaitTemplate : CreatureTemplate
     {

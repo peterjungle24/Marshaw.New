@@ -51,9 +51,7 @@ namespace SourceCode.POM
 
                     // checks if the BODY of the player its inside
                     if (rect.Contains(chunk.pos))
-                    {
                         ClimbFunction(plr);
-                    }
                 }
             }
         }
@@ -70,19 +68,12 @@ namespace SourceCode.POM
             // keybind for "climb" upwards (upwards is the right word?)
             // and also checks if the slide counter is upper than 0, we dont want to climb the non walls :monksilly:
             if (self.input[0].y > 0 && self.wallSlideCounter > 0)
-            {
                 // jump
                 self.WallJump(direction);
-
-                UnityEngine.Debug.Log("Something/ClimbFunction(Player self) -> here.");
-                logger.LogWarning("Something/ClimbFunction(Player self) -> here.");
-            }
         }
     }
     public class ClimbableSurface_REPR : ManagedRepresentation
     {
-        public ClimbableSurface_REPR(PlacedObject.Type type, ObjectsPage object_page, PlacedObject placed_object) : base(type, object_page, placed_object)
-        {
-        }
+        public ClimbableSurface_REPR(PlacedObject.Type type, ObjectsPage object_page, PlacedObject placed_object) : base(type, object_page, placed_object) { }
     }
 }

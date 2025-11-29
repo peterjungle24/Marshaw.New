@@ -53,8 +53,6 @@ namespace SourceCode.Creatures.Lizards
             On.LizardBreeds.BreedTemplate_Type_CreatureTemplate_CreatureTemplate_CreatureTemplate_CreatureTemplate += BreedTemplates;
             On.StaticWorld.InitCustomTemplates += InitCustomTemplates;
 
-            // Graphics
-
             // IL
             IL.LizardBreeds.BreedTemplate_Type_CreatureTemplate_CreatureTemplate_CreatureTemplate_CreatureTemplate += IL_BreedTtemplates;
         }
@@ -166,7 +164,7 @@ namespace SourceCode.Creatures.Lizards
             );
 
             // set the creature name
-            creatureTemplate.name = "Valve Lizard";
+            creatureTemplate.name = ValveLizardEnums.creatureTemplateType.value;
             // looks like some creatures have the pre baked pathing
             // but since this ones doesnt have one, it wont work. so a "false" fits here
             creatureTemplate.doPreBakedPathing = false;

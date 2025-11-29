@@ -71,6 +71,18 @@ namespace SourceCode
             #region Misc
             SluggShaders.Hooks();
             #endregion
+
+            On.Player.Update += StunningAtKey;
+        }
+
+        private void StunningAtKey(On.Player.orig_Update orig, Player self, bool eu)
+        {
+            if (Input.GetKeyDown(KeyCode.C) )
+            {
+                self.Stun(40);
+            }
+
+            orig(self, eu);
         }
 
         private void Initialize(On.RainWorld.orig_OnModsInit orig, RainWorld self)
@@ -81,8 +93,8 @@ namespace SourceCode
             try
             {
                 // ascii my beloved
-                var hidden = MyMessages.ChoseRandomMessages();
-                log.Log($"{Color.yellow}{hidden}");
+                //var hidden = MyMessages.ChoseRandomMessages();
+                //log.Log($"{Color.yellow}{hidden}");
 
                 /* FONT */
                 font = Custom.GetDisplayFont();
