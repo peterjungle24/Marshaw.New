@@ -6,6 +6,8 @@ namespace SourceCode.Utilities
     {
         public const string HoldButtonCircle = "HoldButtonCircle";
         public const string CustomDepth = "CustomDepth";
+        public static string VectorCircle = "VectorCircle";
+        public static string GhostDistortion = "GhostDisto";
 
         #region custom / forks
         public const string slugg_CustomTextureDepth = "slugg.CustomTextureDepth";

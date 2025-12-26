@@ -4,6 +4,33 @@
         <name>SourceCode</name>
     </assembly>
     <members>
+        <member name="T:SourceCode.Helpers.RoomHelpers">
+            <summary>Credits for TheVileOne ;)</summary>
+        </member>
+        <member name="M:SourceCode.Helpers.RoomHelpers.FindObjectsNearby(Room,UnityEngine.Vector2,System.Single)">
+            <summary>
+            Finds all objects belonging to a room instance at or within a given distance_checker from an origin point
+            </summary>
+            <param name="room">The room to check</param>
+            <param name="origin">The point to compare the distance_checker to</param>
+            <param name="distanceThreshold">The desired distance_checker to the origin point</param>
+            <returns>All results that match the specified conditions</returns>
+        </member>
+        <member name="M:SourceCode.Helpers.RoomHelpers.FindObjectsNearby``1(Room,UnityEngine.Vector2,System.Single)">
+            <summary>
+            Finds all objects belonging to a room instance at or within a given distance_checker from an origin point that are of the type T
+            </summary>
+            <param name="room">The room to check</param>
+            <param name="origin">The point to compare the distance_checker to</param>
+            <param name="distanceThreshold">The desired distance_checker to the origin point</param>
+            <returns>All results that match the specified conditions</returns>
+        </member>
+        <member name="M:SourceCode.Helpers.RoomHelpers.GetAllObjects(Room)">
+            <summary>
+            Returns all objects belonging to a room instance
+            </summary>
+            <param name="room">The room to check</param>
+        </member>
         <member name="M:SourceCode.Helpers.PathHelpers.GetModFolder">
             <summary>
             Just gets the mod folder
@@ -71,6 +98,69 @@
             <param name="obj1">The first object to be the ingredient</param>
             <param name="obj2">The second object to be the ingredient</param>
             <returns></returns>
+        </member>
+        <member name="F:SourceCode.Slugcats.Marshaw.SanitySystem.creatureDictionary">
+            <summary>Dictionary that stores the amount of sanity each creature will drains from player,<br/>if the player is close enough.</summary>
+        </member>
+        <member name="F:SourceCode.Slugcats.Marshaw.SanitySystem.friendlyCreatureTypes">
+            <summary>List that can regenerate a little bit of sanity, if the player is close enough.</summary>
+        </member>
+        <member name="P:SourceCode.Slugcats.Marshaw.SanitySystem.log">
+            <summary>Nice logger for log</summary>
+        </member>
+        <member name="P:SourceCode.Slugcats.Marshaw.SanitySystem.isMarshaw">
+            <summary>flag that checks if the current slugcat is Marshaw</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnHooks">
+            <summary>
+            Method that acts like a core.<br/>
+            Connects each private and public method for execute.
+            </summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.Logic(On.Player.orig_Update,Player,System.Boolean)">
+            <summary>
+            Executes the sanity logic on the Player update.<br/>
+            For now, it only works if the current slugcat is Marshaw.
+            </summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)">
+            <summary>Method that initialize values in OnModsInit period.</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.CalculateDictionary(CreatureTemplate)">
+            <summary>Method tha calculates the sanity value, using dictionary and list as base.</summary>
+            <param name="crit">creature used to be calculated</param>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.CollectionsSetup">
+            <summary>
+            Method that initializes all the dictionary and list values.<br/>
+            Better if called in <see cref="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)"></see>.
+            </summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnCritical(Player)">
+            <summary>
+            Executes when the sanity is on their critical levels (alpha less than 0.10f)
+            </summary>
+        </member>
+        <member name="T:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics">
+            <summary>Class just made for handle the HUD, UI, idk</summary>
+        </member>
+        <member name="F:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.sprite">
+            <summary>That ominous circle on the top-right of your screen.</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)">
+            <summary>Method that initialize things</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.UI_Handle(On.RoomCamera.orig_DrawUpdate,RoomCamera,System.Single,System.Single)">
+            <summary>Handles some UI things here</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.MovingUI(On.RoomCamera.orig_DrawUpdate,RoomCamera,System.Single,System.Single)">
+            <summary>
+            Its a testing method.<br/>
+            It allows me to move UI <i>(if i coded)</i>, or just for increase/decrease alpha.
+            </summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.LerpEffect(RoomCamera)">
+            <summary>Method responsable for making the LERP effect on the room, and in itself.</summary>
         </member>
         <member name="P:SourceCode.Utilities.SluggShaders.log">
             My Shaders

@@ -17,13 +17,14 @@ namespace SourceCode.POM
     }
     public class MyTrigger : UpdatableAndDeletable
     {
-        public delegate void OnTrigger(string id);
-        public static OnTrigger onTriggerEvent;
-        public static string Id;
-        public string id;
+        public enum TriggerOption { Once, Update }
+        public TriggerOption triggerOption = TriggerOption.Once;
         LogUtils.Logger logger => Plugin.log;
         PlacedObject self;
         Vector2 scale;
+        string id;
+        Rect rect;
+        bool once = false;
 
         public MyTrigger(Room room, PlacedObject obj)
         {
@@ -31,11 +32,34 @@ namespace SourceCode.POM
             this.self = obj;
             this.scale = PomHelpers.GetVector2Field<MyTrigger_Data>(self, "scale");
             this.id = PomHelpers.GetStringField<MyTrigger_Data>(self, "id");
-            // acess.
-            Id = id;
-
-            logger.LogInfo($"{Color.yellow}There is: {Id}/{id}");
         }
+
+        public override void Update(bool eu)
+        {
+            rect = new Rect(self.pos, scale);
+
+            // i like this more than Foreach :D
+            for (var i = 0; i < this.room.game.Players.Count; i++)
+            {
+                // if the list of players is not null
+                if (this.room.game.Players[i] != null)
+                {
+                    // get player
+                    var plr = room.game.Players[i]?.realizedCreature as Player;
+                    // get rcam
+                    var rcam = this.room.game.cameras[0];
+                    // main body
+                    var chunk = plr.mainBodyChunk;
+
+                    // checks if the BODY of the player its inside
+                    if (rect.Contains(chunk.pos) )
+                    {
+                        Debug.Log("torturing yourself >:)");
+                    }
+                }
+            }
+        }
+
     }
     public class MyTrigger_REPR : ManagedRepresentation
     {

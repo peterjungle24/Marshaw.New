@@ -2,6 +2,8 @@
 // Its better not only for me, but maybe for you as well
 // Because my coding skills sucks
 
+using SourceCode.Slugcats.Marshaw;
+
 namespace SourceCode.Slugcats
 {
     public class MarshawFeatures
@@ -11,6 +13,10 @@ namespace SourceCode.Slugcats
 
         public static void Hooks()
         {
+            // SANITY -------------------------------------
+            // sanity system.
+            SanitySystem.OnHooks();
+
             // DOUBLE SPEAR HOLD -------------------------------------
             // makes Marshaw hold 2 spears with 2 hands
             On.Player.Grabability += SpearDealer;
@@ -209,6 +215,9 @@ namespace SourceCode.Slugcats
                 self.playerState.isPup = true;
             }
         }
+
+        #endregion
+        #region GUI
 
         #endregion
     }

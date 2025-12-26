@@ -21,6 +21,8 @@ namespace SourceCode
     public class Plugin : BaseUnityPlugin
     {
         // the slugcats ids
+        public static bool isMarshaw;
+        public static bool isSlugg;
         public static readonly SlugcatStats.Name slgMarshaw = new SlugcatStats.Name("slugg.slugcat.marshaw");
         public static readonly SlugcatStats.Name slgSlugg = new SlugcatStats.Name("slugg.slugcat.slugg");
         public static readonly LogUtils.Logger log = new LogUtils.Logger(LogID.BepInEx, LogID.Unity);
@@ -69,21 +71,22 @@ namespace SourceCode
 
             #endregion
             #region Misc
+
             SluggShaders.Hooks();
             #endregion
 
-            On.Player.Update += StunningAtKey;
+            On.Player.Update += UI_Stuff;
         }
 
-        private void StunningAtKey(On.Player.orig_Update orig, Player self, bool eu)
+        private void UI_Stuff(On.Player.orig_Update orig, Player self, bool eu)
         {
-            if (Input.GetKeyDown(KeyCode.C) )
-            {
-                self.Stun(40);
-            }
+            if (self.slugcatStats.name == slgMarshaw) isMarshaw = true; else isMarshaw = false;
+            if (self.slugcatStats.name == slgSlugg) isSlugg = true; else isSlugg = false;
 
             orig(self, eu);
         }
+
+        private FSprite sprite;
 
         private void Initialize(On.RainWorld.orig_OnModsInit orig, RainWorld self)
         {
@@ -93,14 +96,20 @@ namespace SourceCode
             try
             {
                 // ascii my beloved
-                //var hidden = MyMessages.ChoseRandomMessages();
-                //log.Log($"{Color.yellow}{hidden}");
+                // chooses a random message.. wow
+                var hidden = MyMessages.ChoseRandomMessages();
+                // log it.
+                log.Log($"{Color.yellow}{hidden}");
 
                 /* FONT */
+                // initialize the field "font"
                 font = Custom.GetDisplayFont();
+                log.LogInfo($"{Color.yellow}Marshaw is alive, i guess.");
 
                 /* MENU REMIX */
+                // initializes the "remix" field
                 remix = new RemixMenu.REMIX_menuses();
+                // set a registered HI (oi) to th machine connector
                 MachineConnector.SetRegisteredOI(ID, remix);
                 /****************************************************/
             }
@@ -144,6 +153,8 @@ namespace SourceCode
                 }
             };
         }
+
+        
     }
 }
 
