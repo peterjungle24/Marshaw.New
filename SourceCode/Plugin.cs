@@ -8,11 +8,14 @@ using SourceCode;
 using SourceCode.Helpers;
 using SourceCode.POM;
 using SourceCode.Utilities;
+using SourceCode.Creatures;
 using BepInEx.Logging;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using LogUtils.Diagnostics;
-
+using System.Diagnostics;
+using Fisobs;
+using Fisobs.Core;
 namespace SourceCode
 {
     // good class template to the rain world modding.
@@ -25,19 +28,16 @@ namespace SourceCode
         public static bool isSlugg;
         public static readonly SlugcatStats.Name slgMarshaw = new SlugcatStats.Name("slugg.slugcat.marshaw");
         public static readonly SlugcatStats.Name slgSlugg = new SlugcatStats.Name("slugg.slugcat.slugg");
-        public static readonly LogUtils.Logger log = new LogUtils.Logger(LogID.BepInEx, LogID.Unity);
-
+        public static LogUtils.Logger log;
         // i fucking like this one, it stores my mod ID globally
         public static string modID { get => ID; }
         // cool font
         public static string font;
-
         // i like to store these consts and use them.
         // idk why but i am used to this
         private const string ID = "slugg.mod";
         private const string NAME = "Marshawwwwwwwwwwwww";
         private const string VERSION = "0.1.2";
-
         // the remix menu instance
         private static RemixMenu.REMIX_menuses remix;
 
@@ -46,48 +46,45 @@ namespace SourceCode
         {
             // Initialize logging. Useful for see if the mod is actually working.
             On.RainWorld.OnModsInit += Initialize;
-            // Add room scripts
-            AddRoomScripts();
-            // just a method that tests and creates LogIds (logUtils)
-            MyLogID();
             // Initialize the POM objects
-            InitializePOM();
+            //InitializePOM();
+            // Some lizard hooks here
+            // if theres more, i will create a new method.
+            On.LizardBreeds.BreedTemplate_Type_CreatureTemplate_CreatureTemplate_CreatureTemplate_CreatureTemplate += LizardHooks.On_LizardBreeds_BreedTemplate_Type_CreatureTemplate_CreatureTemplate_CreatureTemplate_CreatureTemplate;
+            On.LizardVoice.GetMyVoiceTrigger += LizardHooks.On_LizardVoice_GetMyVoiceTrigger;
+            // Initialize the creatures and objects from Fisobs
+            RegisterFisobs();
             //---------------------------------------------------------------------------+
 
-            #region Slugcats
-            Slugcats.MarshawFeatures.Hooks();
-
-            Slugcats.SluggFeatures.Hooks();
+            ////-Slugcats
+            // MARSHAW
+            Slugcats.Marshaw.Hooks();
+            // SLUGG
+            //Slugcats.Slugg.Hooks();
             //Slugcats.SluggGraphics.Hooks();
-            #endregion
-            #region Creatures
-
-            #region Tube Worms
+            
+            ////-Creatures
+            // Tube Worms
             Creatures.GrapleWorm.GlowSaitHooks.Hooks();
-            #endregion
-            #region lizards
+            // lizards
             Creatures.Lizards.ValveLizardHooks.Hooks();
-            #endregion
 
-            #endregion
-            #region Misc
+            ////-Objects
+            Objects.FireballHooks.Hooks();
 
+            ////-Misc
             SluggShaders.Hooks();
-            #endregion
 
-            On.Player.Update += UI_Stuff;
+            On.Player.Update += SlugcatFlags;
         }
 
-        private void UI_Stuff(On.Player.orig_Update orig, Player self, bool eu)
+        private void SlugcatFlags(On.Player.orig_Update orig, Player self, bool eu)
         {
             if (self.slugcatStats.name == slgMarshaw) isMarshaw = true; else isMarshaw = false;
             if (self.slugcatStats.name == slgSlugg) isSlugg = true; else isSlugg = false;
 
             orig(self, eu);
         }
-
-        private FSprite sprite;
-
         private void Initialize(On.RainWorld.orig_OnModsInit orig, RainWorld self)
         {
             // ALWAYS REMEMBER TO CALL THE ORIG AT SOMEWHERE
@@ -95,29 +92,29 @@ namespace SourceCode
 
             try
             {
+                /*
                 // ascii my beloved
                 // chooses a random message.. wow
-                var hidden = MyMessages.ChoseRandomMessages();
+                //var hidden = MyMessages.ChoseRandomMessages();
                 // log it.
-                log.Log($"{Color.yellow}{hidden}");
+                //log.Log($"{Color.yellow}{hidden}");
 
-                /* FONT */
+                //- FONT -//
                 // initialize the field "font"
-                font = Custom.GetDisplayFont();
-                log.LogInfo($"{Color.yellow}Marshaw is alive, i guess.");
+                //font = Custom.GetDisplayFont();
+                //log.LogInfo($"{Color.yellow}Marshaw is alive, i guess.");
 
-                /* MENU REMIX */
+                //- MENU REMIX -//
                 // initializes the "remix" field
-                remix = new RemixMenu.REMIX_menuses();
+                //remix = new RemixMenu.REMIX_menuses();
                 // set a registered HI (oi) to th machine connector
-                MachineConnector.SetRegisteredOI(ID, remix);
-                /****************************************************/
+                //MachineConnector.SetRegisteredOI(ID, remix);
+                */
+
+                //var logId = new LogID(group.GetRegisteredID(), group.Name, LogAccess.FullAccess);
+                log = new LogUtils.Logger(LogID.BepInEx, LogID.Unity);
             }
-            catch (Exception ex)
-            {
-                log.LogError($"<Plugin.Initialize()> looks like something went wrong.\n{ex}");
-                Debugf.Log($"<Plugin.Initialize()> looks like something went wrong.\n{ex}");
-            }
+            catch (Exception ex) { throw ex; }
         }
         private void InitializePOM()
         {
@@ -133,28 +130,10 @@ namespace SourceCode
             RegisterManagedObject<MyTrigger, MyTrigger_Data, MyTrigger_REPR>("My Trigger", objects, false);
 
         }
-        private void MyLogID()
+        private void RegisterFisobs()
         {
-            var myLog = new LogID("pedro.log", LogAccess.FullAccess, true);
-            var properties = new LogProperties("pedro.log");
-            var log = new LogUtils.Logger(myLog);
-
-            log.LogInfo("\nWhat The Hell????\n");
-
+            Content.Register(new Creatures.Lizards.TestLizardCritob() );
         }
-        private void AddRoomScripts()
-        {
-            On.RoomSpecificScript.AddRoomSpecificScript += (On.RoomSpecificScript.orig_AddRoomSpecificScript orig, Room room) =>
-            {
-                if (room.abstractRoom.name == "SU_A24")
-                {
-                    if (room.game.IsStorySession)
-                        room.AddObject(new RoomScripts.RSCR_WhateverIsThis(room) );
-                }
-            };
-        }
-
-        
     }
 }
 

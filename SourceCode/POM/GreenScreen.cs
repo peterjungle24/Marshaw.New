@@ -39,7 +39,7 @@ namespace SourceCode.POM
     public class GreenScreen : UpdatableAndDeletable, IDrawable
     {
         PlacedObject self;
-        private static LogUtils.Logger logger => Plugin.log;
+        LogUtils.Logger logger => Plugin.log;
         ContainerLayers container;
         Vector2 scale;
 

@@ -65,14 +65,14 @@
             <param name="b"></param>
             <returns></returns>
         </member>
-        <member name="M:SourceCode.Slugcats.MarshawFeatures.PostMotsInitialize(On.RainWorld.orig_PostModsInit,RainWorld)">
+        <member name="M:SourceCode.Slugcats.Marshaw.Features.PostMotsInitialize(On.RainWorld.orig_PostModsInit,RainWorld)">
             <summary>
             create the hooks for let the craft works
             </summary>
             <param name="orig"></param>
             <param name="self"></param>
         </member>
-        <member name="M:SourceCode.Slugcats.MarshawFeatures.Grasps(On.Player.orig_GraspsCanBeCrafted,Player)">
+        <member name="M:SourceCode.Slugcats.Marshaw.Features.Grasps(On.Player.orig_GraspsCanBeCrafted,Player)">
             <summary>
             Manages some grasps for the specific slugcat (marshaw)
             </summary>
@@ -80,16 +80,19 @@
             <param name="self"></param>
             <returns></returns>
         </member>
-        <member name="M:SourceCode.Slugcats.MarshawFeatures.GourmanCombos(On.MoreSlugcats.GourmandCombos.orig_CraftingResults,PhysicalObject,Creature.Grasp,Creature.Grasp)">
+        <member name="M:SourceCode.Slugcats.Marshaw.Features.CraftingResultsManager(On.Player.orig_CraftingResults,Player)">
+            <summary>the manager of the results, i presume</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.Marshaw.Features.GourmanCombos(On.MoreSlugcats.GourmandCombos.orig_CraftingResults,PhysicalObject,Creature.Grasp,Creature.Grasp)">
             <summary> The combos manager, where it will use the "Craft" method for craft things </summary>
         </member>
-        <member name="M:SourceCode.Slugcats.MarshawFeatures.Craft(Player,Creature.Grasp,Creature.Grasp)">
+        <member name="M:SourceCode.Slugcats.Marshaw.Features.Craft(Player,Creature.Grasp,Creature.Grasp)">
             <summary>
             The recipes of craftings are stored here, allowing any ingrendient
             </summary>
             <returns>a result of the craft from 2 specific items listed here</returns>
         </member>
-        <member name="M:SourceCode.Slugcats.MarshawFeatures.CraftingHelper(Creature.Grasp,Creature.Grasp,AbstractPhysicalObject.AbstractObjectType,AbstractPhysicalObject.AbstractObjectType)">
+        <member name="M:SourceCode.Slugcats.Marshaw.Features.CraftingHelper(Creature.Grasp,Creature.Grasp,AbstractPhysicalObject.AbstractObjectType,AbstractPhysicalObject.AbstractObjectType)">
             <summary>
             Just a grasps helper for short the code.
             </summary>
@@ -99,67 +102,73 @@
             <param name="obj2">The second object to be the ingredient</param>
             <returns></returns>
         </member>
-        <member name="F:SourceCode.Slugcats.Marshaw.SanitySystem.creatureDictionary">
+        <member name="P:SourceCode.Slugcats.SanitySystem.spriteAlpha">
+            <summary>The current alpha from the sprite</summary>
+        </member>
+        <member name="F:SourceCode.Slugcats.SanitySystem.creatureDictionary">
             <summary>Dictionary that stores the amount of sanity each creature will drains from player,<br/>if the player is close enough.</summary>
         </member>
-        <member name="F:SourceCode.Slugcats.Marshaw.SanitySystem.friendlyCreatureTypes">
+        <member name="F:SourceCode.Slugcats.SanitySystem.friendlyCreatureTypes">
             <summary>List that can regenerate a little bit of sanity, if the player is close enough.</summary>
         </member>
-        <member name="P:SourceCode.Slugcats.Marshaw.SanitySystem.log">
+        <member name="P:SourceCode.Slugcats.SanitySystem.log">
             <summary>Nice logger for log</summary>
         </member>
-        <member name="P:SourceCode.Slugcats.Marshaw.SanitySystem.isMarshaw">
+        <member name="P:SourceCode.Slugcats.SanitySystem.isMarshaw">
             <summary>flag that checks if the current slugcat is Marshaw</summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnHooks">
+        <member name="F:SourceCode.Slugcats.SanitySystem.isCritical">
+            <summary>a check when the sprite alpha is below than 0.10f</summary>
+        </member>
+        <member name="M:SourceCode.Slugcats.SanitySystem.OnHooks">
             <summary>
             Method that acts like a core.<br/>
             Connects each private and public method for execute.
             </summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.Logic(On.Player.orig_Update,Player,System.Boolean)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.Logic(On.Player.orig_Update,Player,System.Boolean)">
             <summary>
             Executes the sanity logic on the Player update.<br/>
             For now, it only works if the current slugcat is Marshaw.
             </summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)">
             <summary>Method that initialize values in OnModsInit period.</summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.CalculateDictionary(CreatureTemplate)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.CalculateDictionary(CreatureTemplate)">
             <summary>Method tha calculates the sanity value, using dictionary and list as base.</summary>
             <param name="crit">creature used to be calculated</param>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.CollectionsSetup">
+        <member name="M:SourceCode.Slugcats.SanitySystem.CollectionsSetup">
             <summary>
             Method that initializes all the dictionary and list values.<br/>
-            Better if called in <see cref="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)"></see>.
+            Better if called in <see cref="M:SourceCode.Slugcats.SanitySystem.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)"></see>.
             </summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.OnCritical(Player)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.OnCritical(Player)">
             <summary>
             Executes when the sanity is on their critical levels (alpha less than 0.10f)
             </summary>
         </member>
-        <member name="T:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics">
+        <member name="T:SourceCode.Slugcats.SanitySystem.SanityGraphics">
             <summary>Class just made for handle the HUD, UI, idk</summary>
         </member>
-        <member name="F:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.sprite">
+        <member name="F:SourceCode.Slugcats.SanitySystem.SanityGraphics.sprite">
             <summary>That ominous circle on the top-right of your screen.</summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.SanityGraphics.OnInitialize(On.RainWorld.orig_OnModsInit,RainWorld)">
             <summary>Method that initialize things</summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.UI_Handle(On.RoomCamera.orig_DrawUpdate,RoomCamera,System.Single,System.Single)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.SanityGraphics.UI_Handle(On.RoomCamera.orig_DrawUpdate,RoomCamera,System.Single,System.Single)">
             <summary>Handles some UI things here</summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.MovingUI(On.RoomCamera.orig_DrawUpdate,RoomCamera,System.Single,System.Single)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.SanityGraphics.MovingUI(On.RoomCamera.orig_DrawUpdate,RoomCamera,System.Single,System.Single)">
             <summary>
             Its a testing method.<br/>
             It allows me to move UI <i>(if i coded)</i>, or just for increase/decrease alpha.
             </summary>
         </member>
-        <member name="M:SourceCode.Slugcats.Marshaw.SanitySystem.SanityGraphics.LerpEffect(RoomCamera)">
+        <member name="M:SourceCode.Slugcats.SanitySystem.SanityGraphics.LerpEffect(RoomCamera)">
             <summary>Method responsable for making the LERP effect on the room, and in itself.</summary>
         </member>
         <member name="P:SourceCode.Utilities.SluggShaders.log">

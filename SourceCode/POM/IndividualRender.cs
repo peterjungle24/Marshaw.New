@@ -101,9 +101,7 @@ namespace SourceCode.POM
             fContainer ??= rCam.ReturnFContainer(container.ToString() );
 
             foreach (FSprite fsprite in sLeaser.sprites)
-            {
                 fContainer.AddChild(fsprite);
-            }
         }
 
         /****************************************************/
