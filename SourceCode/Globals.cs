@@ -25,8 +25,8 @@ global using MoreSlugcats;
 global using DevInterface;
 global using Menu.Remix.MixedUI;
 global using RWCustom;
-global using objPhy = AbstractPhysicalObject;
-global using objType = AbstractPhysicalObject.AbstractObjectType;
+global using AbstrPhyObject = AbstractPhysicalObject;
+global using AbstrObjType = AbstractPhysicalObject.AbstractObjectType;
 global using DLC_ObjType = DLCSharedEnums.AbstractObjectType;
 
 // Mods Libraries

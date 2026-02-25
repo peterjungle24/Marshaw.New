@@ -23,7 +23,7 @@ namespace SourceCode.Slugcats
         private static bool isMarshaw { get => Plugin.isMarshaw; }
         /// <summary>a check when the sprite alpha is below than 0.10f</summary>
         private static bool isCritical;
-        private static FakeCreature fakceCrit;
+        //private static FakeCreature fakceCrit;
         private static float lastThreat = 0f;
 
         /// <summary>
@@ -44,16 +44,9 @@ namespace SourceCode.Slugcats
             On.PlayerGraphics.DrawSprites += Nice;
 
             // FAKE CREATURE
-            FakeCreatureHook.HookOn();
-            FakeCreatureEntry.OnEnable();
-            On.RainWorldGame.Update += FakeCreature_Update;
-        }
-
-        private static void FakeCreature_Update(On.RainWorldGame.orig_Update orig, RainWorldGame self)
-        {
-            fakceCrit.Update(self);
-
-            orig(self);
+            //FakeCreatureHook.HookOn();
+            //FakeCreatureEntry.OnEnable();
+            //On.RainWorldGame.Update += FakeCreature_Update;
         }
 
         /// <summary>
@@ -129,7 +122,7 @@ namespace SourceCode.Slugcats
             orig(self);
 
             try
-            { CollectionsSetup(); fakceCrit = new(); }
+            { CollectionsSetup(); /*fakceCrit = new();*/ }
             catch (Exception ex)
             { log.LogError($"<SanitySystem.OnInitialize()> something went wrong.\n{ex}"); }
         }
@@ -297,6 +290,14 @@ namespace SourceCode.Slugcats
                 sprite.color = Color.Lerp(Color.red, Color.white, sprite.alpha);
             }
         }
+
+        /*
+        private static void FakeCreature_Update(On.RainWorldGame.orig_Update orig, RainWorldGame self)
+        {
+            fakceCrit.Update(self);
+
+            orig(self);
+        }
         private class FakeCreature
         {
             private int waitCounter = 0;
@@ -311,8 +312,8 @@ namespace SourceCode.Slugcats
                         foreach (var shortCut in player.realizedCreature.room.shortcuts.Where(i => i.shortCutType == ShortcutData.Type.RoomExit && ((Custom.Dist(i.StartTile.ToVector2() * 20f, player.realizedCreature.DangerPos) > 200 && Custom.Dist(i.StartTile.ToVector2() * 20f, player.realizedCreature.DangerPos) < 600) || Random.value > 0.5f)))
                         {
                             if (Random.value < Custom.LerpMap(
-                                    Custom.Dist(shortCut.StartTile.ToVector2() * 20f - new Vector2(10, 10), 
-                                    player.realizedCreature.DangerPos), 60, 300, 0.06f, 0.02f, 0.4f) 
+                                    Custom.Dist(shortCut.StartTile.ToVector2() * 20f - new Vector2(10, 10),
+                                    player.realizedCreature.DangerPos), 60, 300, 0.06f, 0.02f, 0.4f)
                                 / 20f * 0.6f *
                                 Mathf.Clamp01(waitCounter - 80) *
                                 Custom.LerpMap(waitCounter, 80, 120, 0.1f, 1f) *
@@ -572,5 +573,6 @@ namespace SourceCode.Slugcats
                 Destroy();
             }
         }
+        */
     }
 }

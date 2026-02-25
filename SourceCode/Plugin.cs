@@ -3,6 +3,7 @@ using BepInEx;
 using LogUtils;
 using LogUtils.Diagnostics.Tests;
 using LogUtils.Enums;
+using LogUtils.Helpers.FileHandling;
 using LogUtils.Properties;
 using SourceCode;
 using SourceCode.Helpers;
@@ -16,6 +17,8 @@ using LogUtils.Diagnostics;
 using System.Diagnostics;
 using Fisobs;
 using Fisobs.Core;
+using LogUtils.Timers;
+
 namespace SourceCode
 {
     // good class template to the rain world modding.
@@ -40,40 +43,37 @@ namespace SourceCode
         private const string VERSION = "0.1.2";
         // the remix menu instance
         private static RemixMenu.REMIX_menuses remix;
+        private LogID myLogID = new LogID("sluggLog", LogsFolder.CurrentPath, LogAccess.FullAccess);
 
         // the core of the mod. hooks will do everything work :>
         public void OnEnable()
         {
+            log = new LogUtils.Logger(LogID.BepInEx, LogID.Unity, myLogID);
+
             // Initialize logging. Useful for see if the mod is actually working.
             On.RainWorld.OnModsInit += Initialize;
             // Initialize the POM objects
-            //InitializePOM();
-            // Some lizard hooks here
-            // if theres more, i will create a new method.
-            On.LizardBreeds.BreedTemplate_Type_CreatureTemplate_CreatureTemplate_CreatureTemplate_CreatureTemplate += LizardHooks.On_LizardBreeds_BreedTemplate_Type_CreatureTemplate_CreatureTemplate_CreatureTemplate_CreatureTemplate;
-            On.LizardVoice.GetMyVoiceTrigger += LizardHooks.On_LizardVoice_GetMyVoiceTrigger;
-            // Initialize the creatures and objects from Fisobs
-            RegisterFisobs();
+            InitializePOM();
+            // Calls (and registers) the both Fisobs and Critobs hooks
+            //FisobsHooks();
+
+            Content.Register(new FIsobs.TestObjectFisobs());
+
             //---------------------------------------------------------------------------+
 
-            ////-Slugcats
+            #region Slugcats
+
             // MARSHAW
-            Slugcats.Marshaw.Hooks();
+            //Slugcats.Marshaw.Hooks();
             // SLUGG
             //Slugcats.Slugg.Hooks();
             //Slugcats.SluggGraphics.Hooks();
-            
-            ////-Creatures
-            // Tube Worms
-            Creatures.GrapleWorm.GlowSaitHooks.Hooks();
-            // lizards
-            Creatures.Lizards.ValveLizardHooks.Hooks();
 
-            ////-Objects
-            Objects.FireballHooks.Hooks();
-
+            #endregion
+            #region Misc
             ////-Misc
-            SluggShaders.Hooks();
+            //SluggShaders.Hooks();
+            #endregion
 
             On.Player.Update += SlugcatFlags;
         }
@@ -92,27 +92,10 @@ namespace SourceCode
 
             try
             {
-                /*
-                // ascii my beloved
-                // chooses a random message.. wow
-                //var hidden = MyMessages.ChoseRandomMessages();
-                // log it.
-                //log.Log($"{Color.yellow}{hidden}");
+                log.LogInfo($"{Color.yellow}Marshaw is being initialized.");
 
-                //- FONT -//
-                // initialize the field "font"
-                //font = Custom.GetDisplayFont();
-                //log.LogInfo($"{Color.yellow}Marshaw is alive, i guess.");
-
-                //- MENU REMIX -//
-                // initializes the "remix" field
-                //remix = new RemixMenu.REMIX_menuses();
-                // set a registered HI (oi) to th machine connector
-                //MachineConnector.SetRegisteredOI(ID, remix);
-                */
-
-                //var logId = new LogID(group.GetRegisteredID(), group.Name, LogAccess.FullAccess);
-                log = new LogUtils.Logger(LogID.BepInEx, LogID.Unity);
+                InitializeDefault();
+                //InitializeLogUtils();
             }
             catch (Exception ex) { throw ex; }
         }
@@ -126,14 +109,117 @@ namespace SourceCode
             RegisterManagedObject<Trianglez, Trianglez_Data, Trianglez_REPR>("Triangles Object", objects, false);
             RegisterManagedObject<PaletteTrigger, PaletteTrigger_Data, PaletteTrigger_REPR>("Palette Trigger", objects, false);
             RegisterManagedObject<GreenScreen, GreenScreen_Data, GreenScreen_REPR>("Green Screen", objects, false);
-            RegisterManagedObject<IndividualRender, IndividualRender_Data, IndividualRender_REPR>("Individual Render", objects, false);
+            //RegisterManagedObject<IndividualRender, IndividualRender_Data, IndividualRender_REPR>("Individual Render", objects, false);
             RegisterManagedObject<MyTrigger, MyTrigger_Data, MyTrigger_REPR>("My Trigger", objects, false);
+        }
+        private void FisobsHooks()
+        {
+            Creatures.Lizards.TestLizardHooks.OnHooks();
+            Creatures.Lizards.LizoBloingHooks.OnHooks();
 
+            RegisterFisobs();
         }
         private void RegisterFisobs()
         {
-            Content.Register(new Creatures.Lizards.TestLizardCritob() );
+            Content.Register(new Creatures.Lizards.TestLizardCritob());
+            Content.Register(new Creatures.Lizards.LizoBloingCritob());
         }
+
+        private void InitializeDefault()
+        {
+            #region Font
+            // initialize the field "font"
+            font = Custom.GetDisplayFont();
+
+            #endregion
+            #region Menu Remix
+            // initializes the "remix" field
+            remix = new RemixMenu.REMIX_menuses();
+            // set a registered HI (oi) to th machine connector
+            MachineConnector.SetRegisteredOI(ID, remix);
+            #endregion
+        }
+        private void InitializeLogUtils()
+        {
+            // creates a new group and i get a registered ID
+            var logGroup = new LogUtils.LogGroupBuilder()
+            {
+                Name = "My news Group",
+                Path = "_Path A",
+                ModIDHint = ID,
+            }
+                .GetRegisteredID();
+
+            var info = new PathInfo("_Path B");
+            
+            // i set the permissions here
+            logGroup.Properties.FolderPermissions = LogUtils.Enums.FileSystem.FolderPermissions.Move;
+            var groupLog = new LogUtils.Logger(new LogID(logGroup, "logFile_0", LogAccess.FullAccess), LogID.BepInEx);
+
+            groupLog.LogInfo("\ti am fucking testing this.");
+            groupLog.LogInfo($"\t GetRoot moment. \"{info.GetRoot()}\"");
+            log.LogInfo($"\t\t{Color.green}meta(data):\n[{logGroup.Properties.ToData()}]");
+        }
+
+        /*
+        private void LogsFolder_OnMoveComplete(LogUtils.Events.PathChangeEventArgs e)
+        {
+            using (var schedule = LogUtils.UtilityCore.Scheduler)
+            {
+                schedule.Schedule(frameInterval: 40, invokeLimit: -1, syncToRainWorld: true, action: () =>
+                {
+                    log.LogInfo($"\t{Color.yellow}<Complete>\"myLogID.currentFolderPath\": [{myLogID.Properties.CurrentFolderPath}].");
+                    log.LogInfo($"\t{Color.yellow}<Complete>\"e.NewPath\": [{e.NewPath}].");
+                    log.LogInfo($"\t{Color.yellow}<Complete>\"LogsFolder.CurrentPath\": [{LogsFolder.CurrentPath}].");
+                });
+            }
+
+            if (myLogID != null)
+            {
+                myLogID.Properties.FileLock.Release();
+                // idk if its needed but i will add it anyway
+                myLogID.Properties.NotifyPathChanged();
+                // i think it updates it.
+                // this is just a theorical path. i dont think i actually have a place to it.
+                myLogID.Properties.ChangePath(e.NewPath);
+            }
+            else log.LogError($"\t<OnMoveComplete> myLogID is null!");
+        }
+        private void LogsFolder_OnMoveAborted(LogUtils.Events.PathChangeEventArgs e)
+        {
+            using (var schedule = LogUtils.UtilityCore.Scheduler)
+            {
+                schedule.Schedule(frameInterval: 40, invokeLimit: -1, syncToRainWorld: true, action: () =>
+                {
+                    log.LogInfo($"\t{Color.yellow}<Aborted>\"myLogID.currentFolderPath\": [{myLogID.Properties.CurrentFolderPath}].");
+                    log.LogInfo($"\t{Color.yellow}<Aborted>\"e.NewPath\": [{e.NewPath}].");
+                    log.LogInfo($"\t{Color.yellow}<Aborted>\"LogsFolder.CurrentPath\": [{LogsFolder.CurrentPath}].");
+                });
+            }
+
+            if (myLogID != null)
+                myLogID.Properties.FileLock.Release();
+            else
+                log.LogError($"\t<OnMoveAborted> myLogID is null!");
+        }
+        private void OnPathChangePendingEvent(LogUtils.Events.PathChangeEventArgs e)
+        {
+            log.LogInfo($"\t{Color.cyan}<Pending>\"myLogID.currentFolderPath\": [{myLogID.Properties.CurrentFolderPath}].");
+
+            if (myLogID != null)
+            {
+                myLogID.Properties.FileLock.Acquire();
+
+                if (LogsFolder.ContainsPath(myLogID.Properties.CurrentFolderPath) == true)
+                {
+                    LogsFolder.OnPathChange.CompletedEvent += LogsFolder_OnMoveComplete;
+                    LogsFolder.OnPathChange.AbortedEvent += LogsFolder_OnMoveAborted;
+                }
+            }
+            else
+                log.LogError($"\t<OnMovePending> myLogID is null!");
+        }
+        */
     }
 }
 
@@ -213,4 +299,35 @@ For loops it jumps to an earlier place in the stack
 
 You know (no i dont) that marking the label sets the label to target the instruction at the cursor's current position.
 And you are using the label to tell the branch instruction where to jump to
+*/
+
+// oh and having unregistered log files in Logs folder IS NOT REALLY SUPPORTED by LogUtils
+// if Fluffball refers to the "log_utils config", then its refering to the file "LogUtils.cfg" with "BepInEx.cfg"
+/* About changing properties of LogID
+
+- Register a LogID to create property entries in `logs.txt`
+- Once entries are written to file, changing them through a code change will not change behavior by default.
+
+Two ways to change behavior after property entries are written to file.
+I. Increase the Version property for your LogID.
+II. Set ReadOnly property to false. This will temporarily disable ReadOnly status allowing you to make changes.
+
+Note: If you need to change the path after entries are written to file, DO NOT change through the constructor.The path is connected to theentries written to file, and changing it makes LogUtils believe it is a new log file with new entries to be written to file.
+My suggestion to change the path is you can use `Properties.SetPath()` to set a temporary path for your file, or bumping the Version, and then changing the `OriginalFolderPath` field directly.
+
+Example:
+--------------------------------------
+LogID myLogID = new LogID("example.log", "SomePath", LogAccess.FullAccess, true);
+
+const int LAST_KNOWN_REVISION = 6;
+if (myLogID.Properties.Version.Minor < LAST_KNOWN_REVISION)
+{
+  //Increase properties version
+myLogID.Properties.Version.Bump(VersionCode.Minor);
+}
+myLogID.Properties.OriginalFolderPath = "MyNewPath";
+--------------------------------------
+
+This advice only is recommended for code after it has been released. At the development stage, you can change these values through the properties file, and as long as you keep the values in sync, there wont be an issue. No version bump required.
+
 */

@@ -11,6 +11,7 @@ namespace SourceCode.Slugcats
 
         public static void Hooks()
         {
+            // gets the features hooks things and call here.
             Features.FeatureHooks();
         }
 
@@ -100,7 +101,7 @@ namespace SourceCode.Slugcats
                 return orig(self);
             }
             /// <summary>the manager of the results, i presume</summary>
-            public static objType CraftingResultsManager(On.Player.orig_CraftingResults orig, Player self)
+            public static AbstrObjType CraftingResultsManager(On.Player.orig_CraftingResults orig, Player self)
             {
                 //if the grasps length is less than 2 and the class is not Marshaw
                 if (self.grasps.Length < 2 || self.SlugCatClass != Marshaw.slugcat)
@@ -116,7 +117,7 @@ namespace SourceCode.Slugcats
                 return craftingResult?.type;
             }
             /// <summary> The combos manager, where it will use the "Craft" method for craft things </summary>
-            public static objPhy GourmanCombos(On.MoreSlugcats.GourmandCombos.orig_CraftingResults orig, PhysicalObject crafter, Creature.Grasp graspA, Creature.Grasp graspB)
+            public static AbstrPhyObject GourmanCombos(On.MoreSlugcats.GourmandCombos.orig_CraftingResults orig, PhysicalObject crafter, Creature.Grasp graspA, Creature.Grasp graspB)
             {
                 //If the player is Marshaw
                 if ((crafter as Player).SlugCatClass == Marshaw.slugcat)
@@ -139,7 +140,7 @@ namespace SourceCode.Slugcats
             /// The recipes of craftings are stored here, allowing any ingrendient
             /// </summary>
             /// <returns>a result of the craft from 2 specific items listed here</returns>
-            public static objPhy Craft(Player player, Creature.Grasp graspA, Creature.Grasp graspB)
+            public static AbstrPhyObject Craft(Player player, Creature.Grasp graspA, Creature.Grasp graspB)
             {
                 var spear = new AbstractSpear(player.room.world, null, player.abstractCreature.pos, player.room.game.GetNewID(), false);            //normal spear
                 var explosiveSpear = new AbstractSpear(player.room.world, null, player.abstractCreature.pos, player.room.game.GetNewID(), true);          //explosive spear
@@ -147,9 +148,7 @@ namespace SourceCode.Slugcats
 
                 //if have nothing
                 if (player == null || graspA?.grabbed == null || graspB?.grabbed == null)
-                {
                     return null;          //return null if have nothing to do
-                }
 
                 //if this scug is Marshaw (if not check it will affect EVERY SCUG)
                 if (player.slugcatStats.name == Marshaw.slugcat)
@@ -160,25 +159,19 @@ namespace SourceCode.Slugcats
                     // > Spear + Flashbang = Spear (electric | charged)
 
                     // Flashbang + Grenade = SingularityBomb
-                    if (CraftingHelper(graspA, graspB, objType.FlareBomb, objType.ScavengerBomb))
-                    {
+                    if (CraftingHelper(graspA, graspB, AbstrObjType.FlareBomb, AbstrObjType.ScavengerBomb))
                         return new AbstractPhysicalObject(player.room.world, DLC_ObjType.SingularityBomb, null, player.abstractCreature.pos, player.room.game.GetNewID());
-                    }
 
                     // Rock + Rock = Spear
-                    if (CraftingHelper(graspA, graspB, objType.Rock, objType.Rock))
-                    {
+                    if (CraftingHelper(graspA, graspB, AbstrObjType.Rock, AbstrObjType.Rock))
                         return spear;   //craft Spear
-                    }
 
                     // Spear + Bomb = Explosion Spear
-                    if (CraftingHelper(graspA, graspB, objType.Spear, objType.ScavengerBomb))
-                    {
+                    if (CraftingHelper(graspA, graspB, AbstrObjType.Spear, AbstrObjType.ScavengerBomb))
                         return explosiveSpear;
-                    }
 
-                    // Spear + Flashbang = Electric Spear (charged)
-                    if (CraftingHelper(graspA, graspB, objType.Spear, objType.FlareBomb))
+                    // Spear + Flashbang = Electric Spear (uncharged)
+                    if (CraftingHelper(graspA, graspB, AbstrObjType.Spear, AbstrObjType.FlareBomb))
                     {
                         // set charge to 0, making it not charged (otherwise it would be op)
                         electricSpear.electricCharge = 0;
@@ -197,7 +190,7 @@ namespace SourceCode.Slugcats
             /// <param name="obj1">The first object to be the ingredient</param>
             /// <param name="obj2">The second object to be the ingredient</param>
             /// <returns></returns>
-            public static bool CraftingHelper(Creature.Grasp graspA, Creature.Grasp graspB, objType obj1, objType obj2)
+            public static bool CraftingHelper(Creature.Grasp graspA, Creature.Grasp graspB, AbstrObjType obj1, AbstrObjType obj2)
             {
                 var grabbedA = graspA.grabbed.abstractPhysicalObject.type;          //hand A
                 var grabbedB = graspB.grabbed.abstractPhysicalObject.type;          //hand B
@@ -222,9 +215,6 @@ namespace SourceCode.Slugcats
                     self.playerState.isPup = true;
                 }
             }
-
-            #endregion
-            #region GUI
 
             #endregion
         }

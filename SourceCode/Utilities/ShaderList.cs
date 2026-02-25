@@ -8,23 +8,19 @@ namespace SourceCode.Utilities
         public const string CustomDepth = "CustomDepth";
         public static string VectorCircle = "VectorCircle";
         public static string GhostDistortion = "GhostDisto";
+        public const string Basic = "Basic";
 
         #region custom / forks
         public const string slugg_CustomTextureDepth = "slugg.CustomTextureDepth";
-        public const string Basic = "Basic";
-
         #endregion
     }
     public class SluggShaders
     {
         /// My Shaders
         private static LogUtils.Logger log => Plugin.log;
-        private static Func<Color, string> f;
 
         public static void Hooks()
         {
-            f = LogUtils.Console.AnsiColorConverter.AnsiToForeground;
-
             On.RainWorld.LoadResources += LoadShaders;
         }
 
@@ -38,17 +34,12 @@ namespace SourceCode.Utilities
             // C:/Program Files (x86)/Steam/steamapps/common/Rain World/RainWorld_Data/StreamingAssets/sluggshaders/testingshader
             var replace = file.Replace('\\', '/');
 
-            // log if its correct
-            log.Log($"{Color.yellow}Sucess!\n{file}\n{replace}\n");
-
             // ASSET BUNDLE MOMENTOS :)
             AssetBundle assetBundle = AssetBundle.LoadFromFile(replace);
-            // this one its being null.
-            self.Shaders.Add(ShaderList.slugg_CustomTextureDepth, FShader.CreateShader(ShaderList.slugg_CustomTextureDepth, assetBundle.LoadAsset<Shader>("Assets/Shaders/CustomTextureDepth.shader")));
-
-            // it output: Sucess!!
-            // ..i forgot to log the path for make sure if its correct
-
+            if (assetBundle != null)
+                self.Shaders.Add(ShaderList.slugg_CustomTextureDepth, FShader.CreateShader(ShaderList.slugg_CustomTextureDepth, assetBundle.LoadAsset<Shader>("Assets/Shaders/CustomTextureDepth.shader")));
+            else
+                throw new NullReferenceException($"<ShaderList.LoadShaders()> it seems like the \"assetBundle\" is null");
             /*
             try
             {

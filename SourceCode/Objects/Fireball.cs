@@ -134,13 +134,13 @@ namespace SourceCode.Objects
             On.ItemSymbol.ColorForItem += SetColorIcon;
         }
 
-        private static Color SetColorIcon(On.ItemSymbol.orig_ColorForItem orig, objType itemType, int intData)
+        private static Color SetColorIcon(On.ItemSymbol.orig_ColorForItem orig, AbstrObjType itemType, int intData)
         {
             if (itemType == ObjectRegister.fireball) return Color.yellow;
 
             return orig(itemType, intData);
         }
-        private static string SetSpriteIcon(On.ItemSymbol.orig_SpriteNameForItem orig, objType itemType, int intData)
+        private static string SetSpriteIcon(On.ItemSymbol.orig_SpriteNameForItem orig, AbstrObjType itemType, int intData)
         {
             if (itemType == ObjectRegister.fireball) return "Futile_White";
 
@@ -172,7 +172,7 @@ namespace SourceCode.Objects
                 throw ex;
             }
         }
-        private static void Realize(On.AbstractPhysicalObject.orig_Realize orig, objPhy self)
+        private static void Realize(On.AbstractPhysicalObject.orig_Realize orig, AbstrPhyObject self)
         {
             orig(self);
 

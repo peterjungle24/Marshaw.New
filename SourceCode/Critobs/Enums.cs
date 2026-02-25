@@ -1,33 +1,30 @@
-﻿global using static LizardTemplate.Enums;
-namespace LizardTemplate;
-
-public class Enums
+﻿namespace SourceCode.Creatures
 {
-    public class CreatureTemplateType
+    public class Enums
     {
-        // change TestLizard to your lizard's name
-        public static CreatureTemplate.Type TestLizard = new(nameof(TestLizard), true);
-        public void UnregisterValues()
+        public class CreatureTemplateType
         {
-            if (TestLizard != null)
+            // change TestLizard to your lizard's name
+            public static CreatureTemplate.Type TestLizard = new(nameof(TestLizard), true);
+            public static CreatureTemplate.Type LizoBloing = new(nameof(LizoBloing), true);
+
+            public void UnregisterValues()
             {
-                TestLizard.Unregister();
-                TestLizard = null;
+                if (TestLizard != null) TestLizard.Unregister(); TestLizard = null;
+                if (LizoBloing != null) LizoBloing.Unregister(); LizoBloing = null;
             }
         }
-    }
 
-    public class SandboxUnlockID
-    {
-        // same as above
-        public static MultiplayerUnlocks.SandboxUnlockID TestLizard = new(nameof(TestLizard), true);
-
-        public void UnregisterValues()
+        public class SandboxUnlockID
         {
-            if (TestLizard != null)
+            // same as above
+            public static MultiplayerUnlocks.SandboxUnlockID TestLizard = new(nameof(TestLizard), true);
+            public static MultiplayerUnlocks.SandboxUnlockID LizoBloing = new(nameof(LizoBloing), true);
+
+            public void UnregisterValues()
             {
-                TestLizard.Unregister();
-                TestLizard = null;
+                if (TestLizard != null) TestLizard.Unregister(); TestLizard = null;
+                if (LizoBloing != null) LizoBloing.Unregister(); LizoBloing = null;
             }
         }
     }
